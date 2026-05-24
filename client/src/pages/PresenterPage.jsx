@@ -1,228 +1,102 @@
-import { useEffect, useState } from "react";
-import { socket } from "../lib/socket";
-import { slides } from "../data/index.js";
-import { EVENTS } from "../../../shared/events.js";
+import { useState } from "react";
+import slides from "../data/slides.js";
+import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
-export default function PresenterPage() {
+export default function PresenterPage({ socket }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [pollOpen, setPollOpen] = useState(false);
-  const [votes, setVotes] = useState({});
-  const [showPollPanel, setShowPollPanel] = useState(false);
 
-  useEffect(() => {
-    socket.emit(EVENTS.JOIN_AS_PRESENTER);
-    socket.on(EVENTS.POLL_RESULTS, (newVotes) => setVotes(newVotes));
-    return () => { socket.off(EVENTS.POLL_RESULTS); };
-  }, []);
-
-  const goToSlide = (index) => {
+  // Tell the server to change the slide for everyone
+  function goToSlide(index) {
     setCurrentSlide(index);
-    setPollOpen(false);
-    setVotes({});
-    setShowPollPanel(false);
-    socket.emit(EVENTS.SLIDE_CHANGE, index);
-  };
+    socket.emit("slide_changed", { slideIndex: index });
+  }
 
-  const openPoll = () => {
-    const poll = slides[currentSlide].poll;
-    if (!poll) return;
-    setPollOpen(true);
-    setVotes({});
-    socket.emit(EVENTS.POLL_OPEN, poll);
-  };
+  // Tell the server to open/close the poll
+  function togglePoll() {
+    const next = !pollOpen;
+    setPollOpen(next);
+    socket.emit("poll_toggled", { open: next });
+  }
 
-  const closePoll = () => {
-    setPollOpen(false);
-    setVotes({});
-    socket.emit(EVENTS.POLL_CLOSE);
-  };
+  function prevSlide() {
+    if (currentSlide > 0) goToSlide(currentSlide - 1);
+  }
 
-  const slide = slides[currentSlide];
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
+  }
+
+  const SlideComponent = slides[currentSlide].presenterView;
 
   return (
-    <div style={styles.page}>
-
-      {/* ── Main slide area ── */}
+    <div style={styles.wrapper}>
+      {/* Slide preview area */}
       <div style={styles.slideArea}>
-        <h2 style={styles.slideTitle}>{slide.title}</h2>
-        <p style={styles.slideContent}>{slide.content}</p>
+        <SlideComponent />
       </div>
 
-      {/* ── Poll results panel (floats above bottom bar) ── */}
-      {showPollPanel && slide.poll && (
-        <div style={styles.pollPanel}>
-          <p style={styles.pollQuestion}>{slide.poll.question}</p>
-          {!pollOpen ? (
-            <button style={styles.pillBtn} onClick={openPoll}>Open Poll</button>
-          ) : (
-            <>
-              {slide.poll.options.map((opt, i) => (
-                <div key={i} style={styles.voteRow}>
-                  <span style={styles.voteLabel}>{opt}</span>
-                  <span style={styles.voteCount}>{votes[i] ?? 0}</span>
-                </div>
-              ))}
-              <button style={styles.pillBtnRed} onClick={closePoll}>Close Poll</button>
-            </>
-          )}
-        </div>
-      )}
+      {/* Control bar at the bottom */}
+      <div style={styles.controlBar}>
+        <button style={styles.btn} onClick={prevSlide}>← Prev</button>
 
-      {/* ── Bottom control bar ── */}
-      <div style={styles.bar}>
-
-        {/* Slide counter */}
         <span style={styles.counter}>
-          {currentSlide + 1} / {slides.length}
+          Slide {currentSlide + 1} of {slides.length}
         </span>
 
-        {/* Navigation */}
-        <div style={styles.navGroup}>
-          <button
-            style={styles.navBtn}
-            onClick={() => goToSlide(currentSlide - 1)}
-            disabled={currentSlide === 0}
-          >
-            ←
-          </button>
-          <button
-            style={styles.navBtn}
-            onClick={() => goToSlide(currentSlide + 1)}
-            disabled={currentSlide === slides.length - 1}
-          >
-            →
-          </button>
-        </div>
+        <button style={styles.btn} onClick={nextSlide}>Next →</button>
 
-        {/* Poll toggle — only shows if this slide has a poll */}
-        {slide.poll && (
-          <button
-            style={{
-              ...styles.pollToggle,
-              background: showPollPanel ? "#01696f" : "transparent",
-              color: showPollPanel ? "white" : "#666",
-            }}
-            onClick={() => setShowPollPanel((v) => !v)}
-          >
-            📊 Poll
-          </button>
-        )}
-
+        <button
+          style={{
+            ...styles.btn,
+            background: pollOpen ? colors.danger : colors.accent,
+            marginLeft: spacing.lg,
+          }}
+          onClick={togglePoll}
+        >
+          {pollOpen ? "Close Poll" : "Open Poll"}
+        </button>
       </div>
     </div>
   );
 }
 
 const styles = {
-  page: {
+  wrapper: {
     display: "flex",
     flexDirection: "column",
     height: "100vh",
-    fontFamily: "sans-serif",
-    background: "#0f1117",
-    color: "white",
-    overflow: "hidden",
+    background: colors.bgDark,
+    color: colors.textPrimary,
+    fontFamily: fonts.family,
   },
   slideArea: {
     flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "4rem",
-    textAlign: "center",
+    overflow: "hidden",
   },
-  slideTitle: {
-    fontSize: "3rem",
-    fontWeight: "700",
-    margin: "0 0 1.5rem 0",
-  },
-  slideContent: {
-    fontSize: "1.4rem",
-    color: "#aaa",
-    maxWidth: "700px",
-    lineHeight: 1.6,
-  },
-  bar: {
+  controlBar: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "1.5rem",
-    padding: "0.75rem 2rem",
-    background: "rgba(255,255,255,0.05)",
-    borderTop: "1px solid rgba(255,255,255,0.08)",
+    gap: spacing.sm,
+    padding: spacing.sm,
+    background: colors.bgCard,
+    borderTop: `1px solid ${colors.border}`,
+  },
+  btn: {
+    padding: `${spacing.xs} ${spacing.sm}`,
+    background: colors.accent,
+    color: colors.textPrimary,
+    border: "none",
+    borderRadius: radii.md,
+    fontSize: fonts.sizeBase,
+    cursor: "pointer",
+    fontWeight: fonts.weightBold,
   },
   counter: {
-    fontSize: "0.85rem",
-    color: "#666",
-    minWidth: "50px",
+    fontSize: fonts.sizeBase,
+    color: colors.textSecondary,
+    minWidth: "120px",
     textAlign: "center",
-  },
-  navGroup: {
-    display: "flex",
-    gap: "0.5rem",
-  },
-  navBtn: {
-    background: "transparent",
-    border: "1px solid rgba(255,255,255,0.15)",
-    color: "white",
-    borderRadius: "8px",
-    padding: "0.4rem 1rem",
-    fontSize: "1rem",
-    cursor: "pointer",
-  },
-  pollToggle: {
-    border: "1px solid rgba(255,255,255,0.15)",
-    borderRadius: "8px",
-    padding: "0.4rem 1rem",
-    fontSize: "0.85rem",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-  },
-  pollPanel: {
-    position: "absolute",
-    bottom: "60px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    background: "#1c1b19",
-    border: "1px solid rgba(255,255,255,0.1)",
-    borderRadius: "12px",
-    padding: "1.25rem 1.5rem",
-    minWidth: "320px",
-    boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-  },
-  pollQuestion: {
-    margin: "0 0 1rem 0",
-    fontSize: "0.95rem",
-    color: "#ccc",
-  },
-  voteRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "0.4rem 0",
-    borderBottom: "1px solid rgba(255,255,255,0.06)",
-    fontSize: "0.9rem",
-  },
-  voteLabel: { color: "#bbb" },
-  voteCount: { color: "white", fontWeight: "700" },
-  pillBtn: {
-    marginTop: "1rem",
-    padding: "0.5rem 1.25rem",
-    background: "#01696f",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontSize: "0.9rem",
-  },
-  pillBtnRed: {
-    marginTop: "1rem",
-    padding: "0.5rem 1.25rem",
-    background: "#a12c7b",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontSize: "0.9rem",
   },
 };
