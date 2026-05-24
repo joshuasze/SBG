@@ -46,14 +46,15 @@ const styles = {
   grid: {
     display: "grid",
     gap: spacing.sm,
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
     maxWidth: "1040px",
     width: "100%",
   },
   card: {
     ...slideUi.card,
-    minHeight: "190px",
-    padding: spacing.md,
+    boxSizing: "border-box",
+    minHeight: "160px",
+    padding: "clamp(0.85rem, 2.4vw, 1.5rem)",
   },
   line: {
     background: colors.accent,
@@ -64,13 +65,13 @@ const styles = {
   cardTitle: {
     color: colors.textPrimary,
     fontFamily: fonts.display,
-    fontSize: "2rem",
+    fontSize: "clamp(1.4rem, 3vw, 2rem)",
     lineHeight: 1,
     margin: `0 0 ${spacing.sm} 0`,
   },
   cardBody: {
     color: colors.textSecondary,
-    fontSize: fonts.sizeBase,
+    fontSize: "clamp(0.9rem, 2vw, 1rem)",
     lineHeight: fonts.lineHeight,
     margin: 0,
   },

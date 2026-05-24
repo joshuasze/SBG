@@ -24,14 +24,16 @@ export default function SlideShell({ photo, align = "center", children, note }) 
 }
 
 const styles = {
+  // The page now uses min-height instead of a hard height so that when the
+  // slide content is taller than the viewport (typical on mobile) the page
+  // can grow and the parent scroll container takes over.
   page: {
     background: colors.bgDark,
     color: colors.textPrimary,
     fontFamily: fonts.family,
-    height: "100%",
     minHeight: "100%",
-    overflow: "hidden",
     position: "relative",
+    width: "100%",
   },
   photo: {
     height: "100%",
@@ -54,14 +56,18 @@ const styles = {
     inset: 0,
     position: "absolute",
   },
+  // Padding scales fluidly with viewport so content never touches the edges
+  // on small screens but still gets generous breathing room on desktop.
   content: {
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
-    height: "100%",
+    minHeight: "100%",
     justifyContent: "center",
-    padding: "clamp(2rem, 6vw, 5.5rem)",
+    padding: "clamp(1.5rem, 5vw, 5.5rem)",
+    paddingBottom: "clamp(1.75rem, 5vw, 5.5rem)",
     position: "relative",
+    width: "100%",
     zIndex: 1,
   },
   note: {

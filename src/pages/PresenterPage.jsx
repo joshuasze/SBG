@@ -61,17 +61,23 @@ export default function PresenterPage({ socket, presentationState, presenterPass
 }
 
 const styles = {
+  // Min-height + svh so the page always covers the viewport but can grow when
+  // the slide content is taller than the screen (mobile / portrait laptops).
   wrapper: {
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
+    minHeight: "100svh",
     background: colors.bgDark,
     color: colors.textPrimary,
     fontFamily: fonts.family,
   },
+  // Scrollable slide region — anything covered by the control bar can be
+  // reached by scrolling, so the bar never traps content.
   slideArea: {
     flex: 1,
-    overflow: "hidden",
+    minHeight: 0,
+    overflowY: "auto",
+    WebkitOverflowScrolling: "touch",
   },
   controlBar: {
     display: "flex",
@@ -80,8 +86,10 @@ const styles = {
     flexWrap: "wrap",
     gap: spacing.sm,
     padding: spacing.sm,
+    paddingBottom: `calc(${spacing.sm} + env(safe-area-inset-bottom, 0px))`,
     background: "rgba(11, 23, 18, 0.96)",
     borderTop: `1px solid ${colors.border}`,
+    boxSizing: "border-box",
   },
   btn: {
     padding: `${spacing.xs} ${spacing.sm}`,
@@ -89,12 +97,12 @@ const styles = {
     color: colors.bgDark,
     border: "none",
     borderRadius: radii.md,
-    fontSize: fonts.sizeBase,
+    fontSize: "clamp(0.85rem, 2.4vw, 1rem)",
     cursor: "pointer",
     fontWeight: fonts.weightBold,
   },
   counter: {
-    fontSize: fonts.sizeBase,
+    fontSize: "clamp(0.85rem, 2.4vw, 1rem)",
     color: colors.textSecondary,
     minWidth: "120px",
     textAlign: "center",

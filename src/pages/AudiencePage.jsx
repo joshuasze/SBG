@@ -25,21 +25,33 @@ export default function AudiencePage({ socket, presentationState }) {
 }
 
 const styles = {
+  // Use min-height + svh so mobile browser chrome (URL bar) doesn't crop the
+  // page, and let the slide area grow + scroll instead of clipping content.
   wrapper: {
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
+    minHeight: "100svh",
     background: colors.bgDark,
     color: colors.textPrimary,
     fontFamily: fonts.family,
   },
+  // Scrollable slide region — the audience can scroll past whatever the poll
+  // card might be covering at the bottom.
   slideArea: {
     flex: 1,
-    overflow: "hidden",
+    minHeight: 0,
+    overflowY: "auto",
+    WebkitOverflowScrolling: "touch",
   },
+  // Poll sits at the bottom but doesn't trap content above it: it simply caps
+  // its own height and scrolls internally if the question + buttons get tall.
   pollArea: {
     padding: spacing.sm,
+    paddingBottom: `calc(${spacing.sm} + env(safe-area-inset-bottom, 0px))`,
     background: "rgba(11, 23, 18, 0.96)",
     borderTop: `1px solid ${colors.border}`,
+    maxHeight: "45vh",
+    overflowY: "auto",
+    boxSizing: "border-box",
   },
 };
