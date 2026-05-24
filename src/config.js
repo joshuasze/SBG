@@ -1,5 +1,5 @@
 const config = {
-  SERVER_URL: "http://localhost:4000",
+  SERVER_URL: "http://sbg.joshuasze.com:4000",
 };
 
 export default config;
