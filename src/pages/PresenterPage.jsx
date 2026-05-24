@@ -35,13 +35,13 @@ export default function PresenterPage({ socket, presentationState, presenterPass
 
       {/* Control bar at the bottom */}
       <div style={styles.controlBar}>
-        <button style={styles.btn} onClick={prevSlide}>← Prev</button>
+        <button style={styles.btn} onClick={prevSlide}>Prev</button>
 
         <span style={styles.counter}>
           Slide {currentSlide + 1} of {slides.length}
         </span>
 
-        <button style={styles.btn} onClick={nextSlide}>Next →</button>
+        <button style={styles.btn} onClick={nextSlide}>Next</button>
 
         <button
           style={{
@@ -71,7 +71,7 @@ const styles = {
     color: colors.textPrimary,
     fontFamily: fonts.family,
   },
-  // Scrollable slide region — anything covered by the control bar can be
+  // Scrollable slide region - anything covered by the control bar can be
   // reached by scrolling, so the bar never traps content.
   slideArea: {
     flex: 1,

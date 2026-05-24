@@ -82,11 +82,10 @@ function PillarBubbles() {
 
 const styles = {
   cluster: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
+    alignItems: "stretch",
+    display: "grid",
     gap: "clamp(0.75rem, 2vw, 1.5rem)",
-    justifyContent: "flex-start",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(170px, 100%), 1fr))",
     maxWidth: "1080px",
     width: "100%",
   },
@@ -100,18 +99,17 @@ const styles = {
     justifyContent: "center",
     padding: "clamp(0.75rem, 2vw, 1.5rem)",
     textAlign: "center",
-    flexShrink: 0,
+    width: "100%",
+    aspectRatio: "1 / 1",
   },
   bubbleMajor: {
     background: colors.accentSoft,
     border: `2px solid ${colors.accent}`,
     boxShadow: "0 32px 80px rgba(0, 0, 0, 0.34)",
-    height: "clamp(200px, 32vw, 320px)",
-    width: "clamp(200px, 32vw, 320px)",
+    minHeight: "clamp(200px, 32vw, 320px)",
   },
   bubbleMinor: {
-    height: "clamp(140px, 20vw, 200px)",
-    width: "clamp(140px, 20vw, 200px)",
+    minHeight: "clamp(140px, 20vw, 200px)",
   },
   bubbleTitle: {
     color: colors.textPrimary,

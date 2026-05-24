@@ -86,7 +86,7 @@ export default function App() {
   if (!connected) {
     return (
       <div style={loadingStyle}>
-        <p>⏳ Connecting to server...</p>
+        <p>Connecting to server...</p>
       </div>
     );
   }
@@ -147,8 +147,8 @@ export default function App() {
   return (
     <div style={loadingStyle}>
       <h2>Choose a view:</h2>
-      <a href="/presenter" style={linkStyle}>🎤 Presenter View</a>
-      <a href="/audience" style={linkStyle}>👥 Audience View</a>
+      <a href="/presenter" style={linkStyle}>Presenter View</a>
+      <a href="/audience" style={linkStyle}>Audience View</a>
     </div>
   );
 }
@@ -158,7 +158,7 @@ const loadingStyle = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  height: "100vh",
+  minHeight: "100svh",
   background: "#0f1117",
   color: "#f5f0e6",
   fontFamily: "'Inter', 'Avenir Next', system-ui, sans-serif",
