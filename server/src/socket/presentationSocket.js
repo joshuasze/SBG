@@ -1,7 +1,13 @@
 import state from "../state/roomState.js";
 
+const PRESENTER_PASSWORD = "sbggpa";
+
 export default function presentationSocket(io, socket) {
   console.log(`✅ Client connected: ${socket.id}`);
+
+  function hasPresenterAccess(password) {
+    return password === PRESENTER_PASSWORD;
+  }
 
   // When a new client connects, send them the current state immediately
   // so they don't see a stale slide or missed poll
@@ -12,7 +18,8 @@ export default function presentationSocket(io, socket) {
   });
 
   // ── Presenter moves to a different slide ──────────────────
-  socket.on("slide_changed", ({ slideIndex } = {}) => {
+  socket.on("slide_changed", ({ slideIndex, presenterPassword } = {}) => {
+    if (!hasPresenterAccess(presenterPassword)) return;
     if (!Number.isInteger(slideIndex) || slideIndex < 0) return;
 
     state.currentSlide = slideIndex;
@@ -27,7 +34,8 @@ export default function presentationSocket(io, socket) {
   });
 
   // ── Presenter opens or closes the poll ───────────────────
-  socket.on("poll_toggled", ({ open } = {}) => {
+  socket.on("poll_toggled", ({ open, presenterPassword } = {}) => {
+    if (!hasPresenterAccess(presenterPassword)) return;
     if (typeof open !== "boolean") return;
 
     state.pollOpen = open;

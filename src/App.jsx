@@ -3,8 +3,15 @@ import { socket } from "./lib/socket.js";
 import PresenterPage from "./pages/PresenterPage.jsx";
 import AudiencePage from "./pages/AudiencePage.jsx";
 
+const PRESENTER_PASSWORD = "sbggpa";
+
 export default function App() {
   const [connected, setConnected] = useState(false);
+  const [presenterPassword, setPresenterPassword] = useState("");
+  const [presenterUnlocked, setPresenterUnlocked] = useState(
+    () => window.sessionStorage.getItem("presenterUnlocked") === "true",
+  );
+  const [presenterError, setPresenterError] = useState("");
   const [presentationState, setPresentationState] = useState({
     currentSlide: 0,
     pollOpen: false,
@@ -85,7 +92,51 @@ export default function App() {
   }
 
   if (path === "/presenter") {
-    return <PresenterPage socket={socket} presentationState={presentationState} />;
+    if (!presenterUnlocked) {
+      return (
+        <div style={loadingStyle}>
+          <form
+            style={passwordFormStyle}
+            onSubmit={(event) => {
+              event.preventDefault();
+
+              if (presenterPassword === PRESENTER_PASSWORD) {
+                window.sessionStorage.setItem("presenterUnlocked", "true");
+                setPresenterUnlocked(true);
+                setPresenterError("");
+                return;
+              }
+
+              setPresenterError("Wrong password. Please try again.");
+            }}
+          >
+            <h2 style={titleStyle}>Presenter password</h2>
+            <input
+              aria-label="Presenter password"
+              autoFocus
+              type="password"
+              value={presenterPassword}
+              onChange={(event) => {
+                setPresenterPassword(event.target.value);
+                setPresenterError("");
+              }}
+              style={inputStyle}
+            />
+            {presenterError && <p style={errorStyle}>{presenterError}</p>}
+            <button type="submit" style={buttonStyle}>Enter Presenter View</button>
+            <a href="/audience" style={secondaryLinkStyle}>Continue as Audience</a>
+          </form>
+        </div>
+      );
+    }
+
+    return (
+      <PresenterPage
+        socket={socket}
+        presentationState={presentationState}
+        presenterPassword={PRESENTER_PASSWORD}
+      />
+    );
   }
 
   if (path === "/audience") {
@@ -122,4 +173,49 @@ const linkStyle = {
   padding: "0.5rem 1.5rem",
   border: "1px solid #d7a84f",
   borderRadius: "8px",
+};
+
+const passwordFormStyle = {
+  display: "flex",
+  flexDirection: "column",
+  width: "min(90vw, 360px)",
+  gap: "0.85rem",
+};
+
+const titleStyle = {
+  margin: 0,
+  fontSize: "1.6rem",
+};
+
+const inputStyle = {
+  width: "100%",
+  boxSizing: "border-box",
+  border: "1px solid rgba(245, 240, 230, 0.24)",
+  borderRadius: "8px",
+  background: "rgba(245, 240, 230, 0.08)",
+  color: "#f5f0e6",
+  padding: "0.75rem 0.9rem",
+  fontSize: "1rem",
+  outline: "none",
+};
+
+const buttonStyle = {
+  ...linkStyle,
+  background: "#d7a84f",
+  color: "#0f1117",
+  cursor: "pointer",
+  fontWeight: 700,
+};
+
+const secondaryLinkStyle = {
+  color: "#c8d2c2",
+  fontSize: "0.95rem",
+  textAlign: "center",
+  textDecoration: "none",
+};
+
+const errorStyle = {
+  margin: 0,
+  color: "#f29b9b",
+  fontSize: "0.95rem",
 };

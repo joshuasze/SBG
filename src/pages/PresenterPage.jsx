@@ -1,18 +1,18 @@
 import slides from "../data/index.js";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
-export default function PresenterPage({ socket, presentationState }) {
+export default function PresenterPage({ socket, presentationState, presenterPassword }) {
   const { currentSlide, pollOpen } = presentationState;
 
   // Tell the server to change the slide for everyone
   function goToSlide(index) {
-    socket.emit("slide_changed", { slideIndex: index });
+    socket.emit("slide_changed", { slideIndex: index, presenterPassword });
   }
 
   // Tell the server to open/close the poll
   function togglePoll() {
     const next = !pollOpen;
-    socket.emit("poll_toggled", { open: next });
+    socket.emit("poll_toggled", { open: next, presenterPassword });
   }
 
   function prevSlide() {
