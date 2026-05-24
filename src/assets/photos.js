@@ -1,5 +1,8 @@
 const photoModules = import.meta.glob(
-  "./photos/*.{jpg,jpeg,png,webp,avif}",
+  [
+    "./photos/*.{jpg,jpeg,png,webp,avif}",
+    "./photos/*.{JPG,JPEG,PNG,WEBP,AVIF}",
+  ],
   { eager: true, query: "?url", import: "default" }
 );
 
