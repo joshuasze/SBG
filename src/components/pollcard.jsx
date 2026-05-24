@@ -1,16 +1,6 @@
 import { useState } from "react";
+import poll from "../data/poll.js";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
-
-// Hardcoded poll question and options — edit these to match your presentation
-const POLL = {
-  question: "Which part of the Gardens would you most want to explore?",
-  options: [
-    "National Orchid Garden",
-    "Rain Forest trail",
-    "Heritage trees",
-    "Lakes and lawns",
-  ],
-};
 
 export default function PollCard({ socket }) {
   const [selected, setSelected] = useState(null);
@@ -36,9 +26,9 @@ export default function PollCard({ socket }) {
   // Before voting — show the question and buttons
   return (
     <div style={styles.card}>
-      <p style={styles.question}>{POLL.question}</p>
+      <p style={styles.question}>{poll.question}</p>
       <div style={styles.options}>
-        {POLL.options.map((option) => (
+        {poll.options.map((option) => (
           <button
             key={option}
             style={styles.optionBtn}

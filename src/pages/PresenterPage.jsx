@@ -1,8 +1,9 @@
 import slides from "../data/index.js";
+import PollDashboard from "../components/PollDashboard.jsx";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
 export default function PresenterPage({ socket, presentationState, presenterPassword }) {
-  const { currentSlide, pollOpen } = presentationState;
+  const { currentSlide, pollOpen, pollVotes } = presentationState;
 
   // Tell the server to change the slide for everyone
   function goToSlide(index) {
@@ -32,6 +33,8 @@ export default function PresenterPage({ socket, presentationState, presenterPass
       <div style={styles.slideArea}>
         <SlideComponent photo={current.photo} />
       </div>
+
+      {pollOpen && <PollDashboard votes={pollVotes} />}
 
       {/* Control bar at the bottom */}
       <div style={styles.controlBar}>
