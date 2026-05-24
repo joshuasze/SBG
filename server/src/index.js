@@ -8,7 +8,7 @@ import presentationSocket from "./socket/presentationSocket.js";
 const app = express();
 const httpServer = createServer(app);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const clientDistPath = path.resolve(__dirname, "../../client/dist");
+const clientDistPath = path.resolve(__dirname, "../../dist");
 
 // Set up Socket.IO with CORS so the frontend (on port 5173) can connect
 const io = new Server(httpServer, {
@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
 });
 
 // Start listening
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
