@@ -3,12 +3,12 @@ import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
 // Hardcoded poll question and options — edit these to match your presentation
 const POLL = {
-  question: "How familiar are you with this topic?",
+  question: "Which part of the Gardens would you most want to explore?",
   options: [
-    "Complete beginner",
-    "I know the basics",
-    "Fairly experienced",
-    "I'm an expert",
+    "National Orchid Garden",
+    "Rain Forest trail",
+    "Heritage trees",
+    "Lakes and lawns",
   ],
 };
 
@@ -27,7 +27,7 @@ export default function PollCard({ socket }) {
   if (submitted) {
     return (
       <div style={styles.card}>
-        <p style={styles.thanks}>✅ Thanks for your response!</p>
+        <p style={styles.thanks}>Thanks for your response.</p>
         <p style={styles.selected}>You answered: <strong>{selected}</strong></p>
       </div>
     );
@@ -58,12 +58,15 @@ const styles = {
     flexDirection: "column",
     gap: spacing.sm,
     padding: spacing.md,
-    background: colors.bgSubtle,
+    background: colors.bgPanel,
     borderRadius: radii.lg,
     border: `1px solid ${colors.border}`,
+    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.24)",
+    backdropFilter: "blur(14px)",
   },
   question: {
-    fontSize: fonts.sizeLg,
+    fontFamily: fonts.display,
+    fontSize: "1.8rem",
     fontWeight: fonts.weightBold,
     color: colors.textPrimary,
     margin: 0,
@@ -76,7 +79,7 @@ const styles = {
   optionBtn: {
     padding: `${spacing.xs} ${spacing.sm}`,
     background: colors.accent,
-    color: colors.textPrimary,
+    color: colors.bgDark,
     border: "none",
     borderRadius: radii.md,
     fontSize: fonts.sizeBase,

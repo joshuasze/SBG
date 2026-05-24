@@ -23,13 +23,14 @@ export default function PresenterPage({ socket, presentationState }) {
     if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
   }
 
-  const SlideComponent = slides[currentSlide]?.presenterView ?? slides[0].presenterView;
+  const current = slides[currentSlide] ?? slides[0];
+  const SlideComponent = current.presenterView;
 
   return (
     <div style={styles.wrapper}>
       {/* Slide preview area */}
       <div style={styles.slideArea}>
-        <SlideComponent />
+        <SlideComponent photo={current.photo} />
       </div>
 
       {/* Control bar at the bottom */}
@@ -46,12 +47,14 @@ export default function PresenterPage({ socket, presentationState }) {
           style={{
             ...styles.btn,
             background: pollOpen ? colors.danger : colors.accent,
+            color: pollOpen ? colors.textPrimary : colors.bgDark,
             marginLeft: spacing.lg,
           }}
           onClick={togglePoll}
         >
           {pollOpen ? "Close Poll" : "Open Poll"}
         </button>
+
       </div>
     </div>
   );
@@ -74,15 +77,16 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexWrap: "wrap",
     gap: spacing.sm,
     padding: spacing.sm,
-    background: colors.bgCard,
+    background: "rgba(11, 23, 18, 0.96)",
     borderTop: `1px solid ${colors.border}`,
   },
   btn: {
     padding: `${spacing.xs} ${spacing.sm}`,
     background: colors.accent,
-    color: colors.textPrimary,
+    color: colors.bgDark,
     border: "none",
     borderRadius: radii.md,
     fontSize: fonts.sizeBase,

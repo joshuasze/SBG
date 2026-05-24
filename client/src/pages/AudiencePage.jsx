@@ -4,13 +4,14 @@ import { colors, fonts, spacing } from "../styles/tokens.js";
 
 export default function AudiencePage({ socket, presentationState }) {
   const { currentSlide, pollOpen } = presentationState;
-  const SlideComponent = slides[currentSlide]?.audienceView ?? slides[0].audienceView;
+  const current = slides[currentSlide] ?? slides[0];
+  const SlideComponent = current.audienceView;
 
   return (
     <div style={styles.wrapper}>
       {/* Slide area */}
       <div style={styles.slideArea}>
-        <SlideComponent />
+        <SlideComponent photo={current.photo} />
       </div>
 
       {/* Poll appears at the bottom when active */}
@@ -38,7 +39,7 @@ const styles = {
   },
   pollArea: {
     padding: spacing.sm,
-    background: colors.bgCard,
+    background: "rgba(11, 23, 18, 0.96)",
     borderTop: `1px solid ${colors.border}`,
   },
 };

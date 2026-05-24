@@ -1,46 +1,77 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
+import SlideShell from "./SlideShell.jsx";
+import { slideText, slideUi } from "./slideTheme.js";
 
-export const PresenterSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>Key Takeaways</h1>
-    <p style={styles.subtitle}>Real-time communication makes presentations more engaging.</p>
-    <p style={styles.hint}>Presenter notes: Recap the main points before closing.</p>
-  </div>
+const takeaways = [
+  ["Conservation", "A garden can protect species while staying open and welcoming."],
+  ["Education", "Living collections turn science into something visitors can see."],
+  ["Memory", "Landscape design preserves history through paths, shade, and gathering places."],
+];
+
+export const PresenterSlide = ({ photo }) => (
+  <SlideShell
+    photo={photo}
+    align="left"
+    note="Recap each point with a concrete example from the Gardens."
+  >
+    <p style={slideText.eyebrow}>Key Takeaways</p>
+    <h1 style={slideText.heading}>What the Garden Teaches</h1>
+    <TakeawayGrid />
+  </SlideShell>
 );
 
-export const AudienceSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>Key Takeaways</h1>
-    <p style={styles.subtitle}>Real-time communication makes presentations more engaging.</p>
-  </div>
+export const AudienceSlide = ({ photo }) => (
+  <SlideShell photo={photo} align="left">
+    <p style={slideText.eyebrow}>Key Takeaways</p>
+    <h1 style={slideText.heading}>What the Garden Teaches</h1>
+    <TakeawayGrid />
+  </SlideShell>
 );
+
+function TakeawayGrid() {
+  return (
+    <div style={styles.grid}>
+      {takeaways.map(([title, body]) => (
+        <article key={title} style={styles.card}>
+          <div style={styles.line} />
+          <h2 style={styles.cardTitle}>{title}</h2>
+          <p style={styles.cardBody}>{body}</p>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 const styles = {
-  page: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    height: "100%",
-    padding: spacing.xl,
+  grid: {
+    display: "grid",
+    gap: spacing.sm,
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    maxWidth: "1040px",
+    width: "100%",
   },
-  title: {
-    fontSize: fonts.sizeHero,
-    fontWeight: fonts.weightBold,
+  card: {
+    ...slideUi.card,
+    minHeight: "190px",
+    padding: spacing.md,
+  },
+  line: {
+    background: colors.accent,
+    height: "3px",
+    marginBottom: spacing.md,
+    width: "48px",
+  },
+  cardTitle: {
     color: colors.textPrimary,
-    margin: `0 0 ${spacing.md} 0`,
+    fontFamily: fonts.display,
+    fontSize: "2rem",
+    lineHeight: 1,
+    margin: `0 0 ${spacing.sm} 0`,
   },
-  subtitle: {
-    fontSize: fonts.sizeLg,
+  cardBody: {
     color: colors.textSecondary,
+    fontSize: fonts.sizeBase,
+    lineHeight: fonts.lineHeight,
     margin: 0,
-    maxWidth: "640px",
-  },
-  hint: {
-    fontSize: fonts.sizeSmall,
-    color: colors.textMuted,
-    marginTop: spacing.lg,
-    fontStyle: "italic",
   },
 };

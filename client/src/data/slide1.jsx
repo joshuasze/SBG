@@ -1,60 +1,75 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
+import SlideShell from "./SlideShell.jsx";
+import { slideText, slideUi } from "./slideTheme.js";
 
-export const PresenterSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>About This Session</h1>
-    <ul style={styles.list}>
-      <li style={styles.item}>📌 Topic 1 — Introduction</li>
-      <li style={styles.item}>📌 Topic 2 — Main Content</li>
-      <li style={styles.item}>📌 Topic 3 — Q&A + Poll</li>
-    </ul>
-    <p style={styles.hint}>📋 Presenter notes: Walk through the agenda briefly.</p>
-  </div>
+const items = [
+  ["01", "Heritage", "Why the Gardens matter as a historic green landmark."],
+  ["02", "Biodiversity", "Palms, orchids, rainforest pockets, and living collections."],
+  ["03", "Experience", "How visitors move, pause, learn, and gather in the landscape."],
+];
+
+export const PresenterSlide = ({ photo }) => (
+  <SlideShell
+    photo={photo}
+    align="left"
+    note="Use this as the roadmap before moving into the interactive poll."
+  >
+    <p style={slideText.eyebrow}>Today&apos;s Route</p>
+    <h1 style={slideText.heading}>What We Will Explore</h1>
+    <AgendaList />
+  </SlideShell>
 );
 
-export const AudienceSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>About This Session</h1>
-    <ul style={styles.list}>
-      <li style={styles.item}>📌 Topic 1 — Introduction</li>
-      <li style={styles.item}>📌 Topic 2 — Main Content</li>
-      <li style={styles.item}>📌 Topic 3 — Q&A + Poll</li>
-    </ul>
-  </div>
+export const AudienceSlide = ({ photo }) => (
+  <SlideShell photo={photo} align="left">
+    <p style={slideText.eyebrow}>Today&apos;s Route</p>
+    <h1 style={slideText.heading}>What We Will Explore</h1>
+    <AgendaList />
+  </SlideShell>
 );
+
+function AgendaList() {
+  return (
+    <div style={styles.list}>
+      {items.map(([number, title, body]) => (
+        <article key={title} style={styles.item}>
+          <span style={slideUi.marker}>{number}</span>
+          <div>
+            <h2 style={styles.itemTitle}>{title}</h2>
+            <p style={styles.itemBody}>{body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 const styles = {
-  page: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    height: "100%",
-    padding: spacing.xl,
-  },
-  title: {
-    fontSize: fonts.sizeHero,
-    fontWeight: fonts.weightBold,
-    color: colors.textPrimary,
-    margin: `0 0 ${spacing.lg} 0`,
-  },
   list: {
-    listStyle: "none",
-    padding: 0,
-    margin: 0,
-    display: "flex",
-    flexDirection: "column",
+    display: "grid",
     gap: spacing.sm,
+    maxWidth: "780px",
+    width: "100%",
   },
   item: {
-    fontSize: fonts.sizeLg,
-    color: colors.textSecondary,
-    lineHeight: fonts.lineHeight,
+    ...slideUi.card,
+    alignItems: "flex-start",
+    display: "grid",
+    gap: spacing.md,
+    gridTemplateColumns: "auto 1fr",
+    padding: spacing.md,
   },
-  hint: {
-    fontSize: fonts.sizeSmall,
-    color: colors.textMuted,
-    marginTop: spacing.lg,
-    fontStyle: "italic",
+  itemTitle: {
+    color: colors.textPrimary,
+    fontFamily: fonts.display,
+    fontSize: "1.8rem",
+    lineHeight: 1,
+    margin: `0 0 ${spacing.xs} 0`,
+  },
+  itemBody: {
+    color: colors.textSecondary,
+    fontSize: fonts.sizeBase,
+    lineHeight: fonts.lineHeight,
+    margin: 0,
   },
 };

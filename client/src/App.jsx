@@ -109,17 +109,17 @@ const loadingStyle = {
   justifyContent: "center",
   height: "100vh",
   background: "#0f1117",
-  color: "#ffffff",
-  fontFamily: "sans-serif",
+  color: "#f5f0e6",
+  fontFamily: "'Inter', 'Avenir Next', system-ui, sans-serif",
   gap: "1rem",
   fontSize: "1.2rem",
 };
 
 const linkStyle = {
-  color: "#01696f",
+  color: "#d7a84f",
   fontSize: "1.2rem",
   textDecoration: "none",
   padding: "0.5rem 1.5rem",
-  border: "1px solid #01696f",
+  border: "1px solid #d7a84f",
   borderRadius: "8px",
 };

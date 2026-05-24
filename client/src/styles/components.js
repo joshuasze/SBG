@@ -3,13 +3,15 @@ import { colors, fonts, radii, spacing } from "./tokens.js";
 export const text = {
   hero: {
     fontSize: fonts.sizeHero,
+    fontFamily: fonts.display,
     fontWeight: fonts.weightBold,
     color: colors.textPrimary,
     margin: `0 0 ${spacing.md} 0`,
-    lineHeight: 1.2,
+    lineHeight: 0.95,
   },
   heading: {
     fontSize: fonts.sizeXl,
+    fontFamily: fonts.display,
     fontWeight: fonts.weightBold,
     color: colors.textPrimary,
     margin: `0 0 ${spacing.sm} 0`,
@@ -31,7 +33,7 @@ export const buttons = {
   primary: {
     padding: "0.6rem 1.5rem",
     background: colors.accent,
-    color: colors.textPrimary,
+    color: colors.bgDark,
     border: "none",
     borderRadius: radii.md,
     fontSize: fonts.sizeBase,
@@ -60,10 +62,12 @@ export const buttons = {
 
 export const containers = {
   card: {
-    background: colors.bgCard,
+    background: colors.bgPanel,
     border: `1px solid ${colors.border}`,
     borderRadius: radii.lg,
     padding: spacing.md,
+    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.24)",
+    backdropFilter: "blur(14px)",
   },
   centered: {
     display: "flex",

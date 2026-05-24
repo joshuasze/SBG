@@ -1,49 +1,51 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
+import SlideShell from "./SlideShell.jsx";
+import { slideText, slideUi } from "./slideTheme.js";
 
-export const PresenterSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>Quick Poll</h1>
-    <p style={styles.subtitle}>Let's hear from the audience.</p>
-    <p style={styles.hint}>
-      📋 Presenter notes: Click "Open Poll" in the control bar below to push
-      the poll to audience devices.
-    </p>
-  </div>
+export const PresenterSlide = ({ photo }) => (
+  <SlideShell
+    photo={photo}
+    align="left"
+    note='Click "Open Poll" in the presenter bar to send the question to audience devices.'
+  >
+    <p style={slideText.eyebrow}>Audience Check-In</p>
+    <h1 style={slideText.heading}>Quick Poll</h1>
+    <div style={styles.pollPlacard}>
+      <p style={styles.question}>Which part of the Gardens would you most want to explore?</p>
+      <p style={styles.body}>Open the poll when you are ready to collect live responses.</p>
+    </div>
+  </SlideShell>
 );
 
-export const AudienceSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>Quick Poll</h1>
-    <p style={styles.subtitle}>⏳ Wait for the presenter to open the poll...</p>
-  </div>
+export const AudienceSlide = ({ photo }) => (
+  <SlideShell photo={photo} align="left">
+    <p style={slideText.eyebrow}>Audience Check-In</p>
+    <h1 style={slideText.heading}>Quick Poll</h1>
+    <div style={styles.pollPlacard}>
+      <p style={styles.question}>Waiting for the presenter to open the poll...</p>
+      <p style={styles.body}>Your choices will appear below when the poll is live.</p>
+    </div>
+  </SlideShell>
 );
 
 const styles = {
-  page: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    height: "100%",
-    padding: spacing.xl,
+  pollPlacard: {
+    ...slideUi.card,
+    borderTop: `3px solid ${colors.accent}`,
+    maxWidth: "680px",
+    padding: spacing.lg,
   },
-  title: {
-    fontSize: fonts.sizeHero,
-    fontWeight: fonts.weightBold,
+  question: {
     color: colors.textPrimary,
-    margin: `0 0 ${spacing.md} 0`,
+    fontFamily: fonts.display,
+    fontSize: "clamp(1.8rem, 3vw, 2.8rem)",
+    lineHeight: 1.05,
+    margin: `0 0 ${spacing.sm} 0`,
   },
-  subtitle: {
-    fontSize: fonts.sizeLg,
+  body: {
     color: colors.textSecondary,
+    fontSize: fonts.sizeBase,
+    lineHeight: fonts.lineHeight,
     margin: 0,
-  },
-  hint: {
-    fontSize: fonts.sizeSmall,
-    color: colors.textMuted,
-    marginTop: spacing.lg,
-    fontStyle: "italic",
-    maxWidth: "500px",
   },
 };

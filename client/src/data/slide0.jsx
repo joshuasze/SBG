@@ -1,47 +1,36 @@
-import { colors, fonts, spacing } from "../styles/tokens.js";
+import { colors, spacing } from "../styles/tokens.js";
+import SlideShell from "./SlideShell.jsx";
+import { slideText } from "./slideTheme.js";
 
-// What the PRESENTER sees
-export const PresenterSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>Welcome!</h1>
-    <p style={styles.subtitle}>Today's session is starting soon.</p>
-    <p style={styles.hint}>📋 Presenter notes: Greet the audience, introduce yourself.</p>
-  </div>
+export const PresenterSlide = ({ photo }) => (
+  <SlideShell
+    photo={photo}
+    align="left"
+    note="Open with the garden as a living UNESCO heritage landscape, then invite the audience into the story."
+  >
+    <p style={slideText.eyebrow}>Singapore Botanic Gardens</p>
+    <h1 style={slideText.title}>A Living Heritage Garden</h1>
+    <p style={slideText.subtitle}>
+      Nature, science, culture, and public life growing together in the heart of Singapore.
+    </p>
+    {!photo && <p style={styles.uploadHint}>Add `slide-0.jpg` to `client/src/assets/photos` for the cover image.</p>}
+  </SlideShell>
 );
 
-// What the AUDIENCE sees (same content, no presenter notes)
-export const AudienceSlide = () => (
-  <div style={{ ...styles.page, background: colors.bgDark }}>
-    <h1 style={styles.title}>Welcome!</h1>
-    <p style={styles.subtitle}>Today's session is starting soon.</p>
-  </div>
+export const AudienceSlide = ({ photo }) => (
+  <SlideShell photo={photo} align="left">
+    <p style={slideText.eyebrow}>Singapore Botanic Gardens</p>
+    <h1 style={slideText.title}>A Living Heritage Garden</h1>
+    <p style={slideText.subtitle}>
+      Nature, science, culture, and public life growing together in the heart of Singapore.
+    </p>
+  </SlideShell>
 );
 
 const styles = {
-  page: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    height: "100%",
-    padding: spacing.xl,
-  },
-  title: {
-    fontSize: fonts.sizeHero,
-    fontWeight: fonts.weightBold,
-    color: colors.textPrimary,
-    margin: `0 0 ${spacing.md} 0`,
-  },
-  subtitle: {
-    fontSize: fonts.sizeLg,
-    color: colors.textSecondary,
-    margin: `0 0 ${spacing.sm} 0`,
-  },
-  hint: {
-    fontSize: fonts.sizeSmall,
-    color: colors.textMuted,
-    marginTop: spacing.lg,
-    fontStyle: "italic",
+  uploadHint: {
+    color: colors.accent,
+    fontSize: "0.95rem",
+    margin: `${spacing.lg} 0 0 0`,
   },
 };
