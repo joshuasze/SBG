@@ -48,6 +48,15 @@ export const AudienceSlide = ({ photo }) => (
 );
 
 function PillarBubbles() {
+  const isCompact = typeof window !== "undefined" && window.innerWidth < 780;
+  const placementByTitle = {
+    "Smart Environmental": styles.environmental,
+    "Smart Living": styles.living,
+    "Smart People": styles.people,
+    "Smart Governance": styles.governance,
+    "Smart Economy": styles.economy,
+  };
+
   return (
     <div style={styles.cluster}>
       {pillars.map(({ title, body, major }) => (
@@ -56,6 +65,7 @@ function PillarBubbles() {
           style={{
             ...styles.bubble,
             ...(major ? styles.bubbleMajor : styles.bubbleMinor),
+            ...(isCompact ? null : placementByTitle[title]),
           }}
         >
           <h2
@@ -82,12 +92,18 @@ function PillarBubbles() {
 
 const styles = {
   cluster: {
-    alignItems: "stretch",
+    alignItems: "center",
     display: "grid",
     gap: "clamp(0.75rem, 2vw, 1.5rem)",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(170px, 100%), 1fr))",
+    gridTemplateColumns: "repeat(3, minmax(100px, 1fr))",
+    gridTemplateAreas: `
+      ". people ."
+      "living environmental governance"
+      ". economy ."
+    `,
     maxWidth: "1080px",
     width: "100%",
+    justifyItems: "center",
   },
   bubble: {
     ...slideUi.card,
@@ -99,18 +115,18 @@ const styles = {
     justifyContent: "center",
     padding: "clamp(0.75rem, 2vw, 1.5rem)",
     textAlign: "center",
-    width: "100%",
-    aspectRatio: "1 / 1",
+    width: "clamp(130px, 20vw, 210px)",
+    height: "clamp(130px, 20vw, 210px)",
+    maxWidth: "100%",
   },
   bubbleMajor: {
     background: colors.accentSoft,
     border: `2px solid ${colors.accent}`,
     boxShadow: "0 32px 80px rgba(0, 0, 0, 0.34)",
-    minHeight: "clamp(200px, 32vw, 320px)",
+    width: "clamp(190px, 30vw, 320px)",
+    height: "clamp(190px, 30vw, 320px)",
   },
-  bubbleMinor: {
-    minHeight: "clamp(140px, 20vw, 200px)",
-  },
+  bubbleMinor: {},
   bubbleTitle: {
     color: colors.textPrimary,
     fontFamily: fonts.display,
@@ -135,4 +151,10 @@ const styles = {
     lineHeight: fonts.lineHeight,
     maxWidth: "240px",
   },
+  // Desktop placement around centered major bubble.
+  environmental: { gridArea: "environmental" },
+  living: { gridArea: "living" },
+  people: { gridArea: "people" },
+  governance: { gridArea: "governance" },
+  economy: { gridArea: "economy" },
 };
