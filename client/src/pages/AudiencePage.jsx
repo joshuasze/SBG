@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { socket } from "../lib/socket";
-import { slides } from "../data/slides";
+import { slides } from "../data/index.js";
 import { EVENTS } from "../../../shared/events.js";
 
 export default function AudiencePage() {
