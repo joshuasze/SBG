@@ -1,21 +1,73 @@
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { socket } from "./lib/socket.js";
 import PresenterPage from "./pages/PresenterPage.jsx";
 import AudiencePage from "./pages/AudiencePage.jsx";
 
-// Connect to the backend server
-// During development this runs on port 4000
-const socket = io("http://localhost:4000");
-
 export default function App() {
   const [connected, setConnected] = useState(false);
+  const [presentationState, setPresentationState] = useState({
+    currentSlide: 0,
+    pollOpen: false,
+    pollVotes: {},
+  });
 
   useEffect(() => {
-    socket.on("connect", () => setConnected(true));
-    socket.on("disconnect", () => setConnected(false));
+    function handleConnect() {
+      setConnected(true);
+    }
+
+    function handleDisconnect() {
+      setConnected(false);
+    }
+
+    function handleInit({ currentSlide, pollOpen, pollVotes }) {
+      setPresentationState({
+        currentSlide,
+        pollOpen,
+        pollVotes,
+      });
+    }
+
+    function handleSlideChanged({ slideIndex }) {
+      setPresentationState((current) => ({
+        ...current,
+        currentSlide: slideIndex,
+        pollOpen: false,
+        pollVotes: {},
+      }));
+    }
+
+    function handlePollToggled({ open }) {
+      setPresentationState((current) => ({
+        ...current,
+        pollOpen: open,
+        pollVotes: open ? current.pollVotes : {},
+      }));
+    }
+
+    function handlePollResults({ votes }) {
+      setPresentationState((current) => ({
+        ...current,
+        pollVotes: votes,
+      }));
+    }
+
+    socket.on("connect", handleConnect);
+    socket.on("disconnect", handleDisconnect);
+    socket.on("init", handleInit);
+    socket.on("slide_changed", handleSlideChanged);
+    socket.on("poll_toggled", handlePollToggled);
+    socket.on("poll_results", handlePollResults);
+
+    socket.connect();
+
     return () => {
-      socket.off("connect");
-      socket.off("disconnect");
+      socket.off("connect", handleConnect);
+      socket.off("disconnect", handleDisconnect);
+      socket.off("init", handleInit);
+      socket.off("slide_changed", handleSlideChanged);
+      socket.off("poll_toggled", handlePollToggled);
+      socket.off("poll_results", handlePollResults);
     };
   }, []);
 
@@ -32,8 +84,13 @@ export default function App() {
     );
   }
 
-  if (path === "/presenter") return <PresenterPage socket={socket} />;
-  if (path === "/audience") return <AudiencePage socket={socket} />;
+  if (path === "/presenter") {
+    return <PresenterPage socket={socket} presentationState={presentationState} />;
+  }
+
+  if (path === "/audience") {
+    return <AudiencePage socket={socket} presentationState={presentationState} />;
+  }
 
   // Fallback if no valid path
   return (

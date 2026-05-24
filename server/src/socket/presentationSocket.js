@@ -12,7 +12,9 @@ export default function presentationSocket(io, socket) {
   });
 
   // ── Presenter moves to a different slide ──────────────────
-  socket.on("slide_changed", ({ slideIndex }) => {
+  socket.on("slide_changed", ({ slideIndex } = {}) => {
+    if (!Number.isInteger(slideIndex) || slideIndex < 0) return;
+
     state.currentSlide = slideIndex;
     state.pollOpen = false;     // always close poll on slide change
     state.pollVotes = {};       // reset votes for the new slide
@@ -25,7 +27,9 @@ export default function presentationSocket(io, socket) {
   });
 
   // ── Presenter opens or closes the poll ───────────────────
-  socket.on("poll_toggled", ({ open }) => {
+  socket.on("poll_toggled", ({ open } = {}) => {
+    if (typeof open !== "boolean") return;
+
     state.pollOpen = open;
 
     if (!open) state.pollVotes = {}; // clear votes when poll closes
@@ -35,8 +39,9 @@ export default function presentationSocket(io, socket) {
   });
 
   // ── Audience member submits a poll vote ──────────────────
-  socket.on("poll_vote", ({ answer }) => {
+  socket.on("poll_vote", ({ answer } = {}) => {
     if (!state.pollOpen) return; // ignore votes if poll is closed
+    if (typeof answer !== "string" || answer.trim() === "") return;
 
     // Count the vote
     state.pollVotes[answer] = (state.pollVotes[answer] || 0) + 1;

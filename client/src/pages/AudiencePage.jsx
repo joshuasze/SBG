@@ -1,32 +1,10 @@
-import { useState, useEffect } from "react";
-import slides from "../data/slides.js";
-import PollCard from "../components/PollCard.jsx";
+import slides from "../data/index.js";
+import PollCard from "../components/pollcard.jsx";
 import { colors, fonts, spacing } from "../styles/tokens.js";
 
-export default function AudiencePage({ socket }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [pollOpen, setPollOpen] = useState(false);
-
-  useEffect(() => {
-    // Listen for slide changes from the presenter
-    socket.on("slide_changed", ({ slideIndex }) => {
-      setCurrentSlide(slideIndex);
-      setPollOpen(false); // close poll when slide changes
-    });
-
-    // Listen for poll open/close from the presenter
-    socket.on("poll_toggled", ({ open }) => {
-      setPollOpen(open);
-    });
-
-    // Clean up listeners when component unmounts
-    return () => {
-      socket.off("slide_changed");
-      socket.off("poll_toggled");
-    };
-  }, [socket]);
-
-  const SlideComponent = slides[currentSlide].audienceView;
+export default function AudiencePage({ socket, presentationState }) {
+  const { currentSlide, pollOpen } = presentationState;
+  const SlideComponent = slides[currentSlide]?.audienceView ?? slides[0].audienceView;
 
   return (
     <div style={styles.wrapper}>

@@ -1,21 +1,17 @@
-import { useState } from "react";
-import slides from "../data/slides.js";
+import slides from "../data/index.js";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
-export default function PresenterPage({ socket }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [pollOpen, setPollOpen] = useState(false);
+export default function PresenterPage({ socket, presentationState }) {
+  const { currentSlide, pollOpen } = presentationState;
 
   // Tell the server to change the slide for everyone
   function goToSlide(index) {
-    setCurrentSlide(index);
     socket.emit("slide_changed", { slideIndex: index });
   }
 
   // Tell the server to open/close the poll
   function togglePoll() {
     const next = !pollOpen;
-    setPollOpen(next);
     socket.emit("poll_toggled", { open: next });
   }
 
@@ -27,7 +23,7 @@ export default function PresenterPage({ socket }) {
     if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
   }
 
-  const SlideComponent = slides[currentSlide].presenterView;
+  const SlideComponent = slides[currentSlide]?.presenterView ?? slides[0].presenterView;
 
   return (
     <div style={styles.wrapper}>
