@@ -1,153 +1,196 @@
-import { colors, fonts, spacing } from "../styles/tokens.js";
-import SlideShell from "./SlideShell.jsx";
-import { slideText, slideUi } from "./slideTheme.js";
+import { colors, fonts } from "../styles/tokens.js";
+import { slideUi } from "./slideTheme.js";
 
-// Smart City pillars — the first one is the major focus and renders largest.
-const pillars = [
+const experienceSites = [
   {
-    title: "Smart Environmental",
-    body: "Biodiversity, climate resilience, and living research.",
-    major: true,
+    title: "Evolution Garden",
+    points: [
+      "1.5-hectare outdoor trail",
+      "Presents the history of plant life on Earth",
+      "Moves from primitive plants to modern flowering species",
+    ],
   },
   {
-    title: "Smart Living",
-    body: "Daily wellbeing through restorative public space.",
-  },
-  {
-    title: "Smart People",
-    body: "Education, outreach, and lifelong learning.",
-  },
-  {
-    title: "Smart Governance",
-    body: "Long-term stewardship, planning, and zoning.",
-  },
-  {
-    title: "Smart Economy",
-    body: "Tourism, talent, and green-sector innovation.",
+    title: "Healing Garden",
+    points: [
+      "2.5-hectare garden with over 400 medicinal plant species",
+      "Shows the connection between plants and traditional medicine",
+      "Links plant knowledge with human wellbeing",
+    ],
   },
 ];
 
-export const PresenterSlide = ({ photo }) => (
-  <SlideShell
-    photo={photo}
-    align="left"
-  >
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={styles.heading}>The Gardens&apos; Five Pillars</h1>
-    <PillarBubbles />
-  </SlideShell>
+export const PresenterSlide = () => (
+  <SlideFrame>
+    <SlideContent />
+  </SlideFrame>
 );
 
-export const AudienceSlide = ({ photo }) => (
-  <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>The Gardens&apos; Five Pillars</h1>
-    <PillarBubbles />
-  </SlideShell>
+export const AudienceSlide = () => (
+  <SlideFrame>
+    <SlideContent />
+  </SlideFrame>
 );
 
-function PillarBubbles() {
+function SlideFrame({ children }) {
   return (
-    <div style={styles.clusterWrap}>
-      <div style={styles.cluster}>
-      {pillars.map(({ title, body, major }) => (
-        <article
-          key={title}
-          style={{
-            ...styles.bubble,
-            ...(major ? styles.bubbleMajor : styles.bubbleMinor),
-          }}
-        >
-          <h2
-            style={{
-              ...styles.bubbleTitle,
-              ...(major ? styles.bubbleTitleMajor : null),
-            }}
-          >
-            {title}
-          </h2>
-          <p
-            style={{
-              ...styles.bubbleBody,
-              ...(major ? styles.bubbleBodyMajor : null),
-            }}
-          >
-            {body}
-          </p>
-        </article>
-      ))}
-      </div>
+    <div style={styles.page}>
+      <div style={styles.canopy} />
+      <div style={styles.stage}>{children}</div>
     </div>
   );
 }
 
+function SlideContent() {
+  return (
+    <section style={styles.layout}>
+      <h1 style={styles.title}>
+        Feature 2: Education, Wellness & Human Experience
+      </h1>
+      <p style={styles.lede}>
+        Singapore Botanic Gardens turns plant knowledge into a walkable,
+        sensory, and personal experience.
+      </p>
+
+      <div style={styles.cardGrid}>
+        {experienceSites.map((site) => (
+          <article key={site.title} style={styles.card}>
+            <h2 style={styles.cardTitle}>{site.title}</h2>
+            <ul style={styles.list}>
+              {site.points.map((point) => (
+                <li key={point} style={styles.item}>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div style={styles.bottomGrid}>
+        <p style={styles.sideNote}>
+          Other human-centered experiences include Jacob Ballas Children&apos;s
+          Garden, Ethnobotany Garden, picnics, outdoor events, and social
+          gatherings.
+        </p>
+        <p style={styles.takeaway}>
+          The Gardens is a place where people learn, heal, relax, and connect
+          with nature.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 const styles = {
-  heading: {
-    ...slideText.heading,
-    fontSize: "clamp(1.8rem, 3.2vw, 3rem)",
-    marginBottom: "clamp(0.6rem, 1.4vw, 1rem)",
-  },
-  clusterWrap: {
+  page: {
+    background:
+      "linear-gradient(135deg, #07110d 0%, #11231b 48%, #20261b 100%)",
+    color: colors.textPrimary,
+    fontFamily: fonts.family,
+    minHeight: "100%",
+    overflowX: "hidden",
+    position: "relative",
     width: "100%",
-    overflowX: "auto",
-    overflowY: "hidden",
-    WebkitOverflowScrolling: "touch",
-    paddingBottom: "0.25rem",
   },
-  cluster: {
-    alignItems: "center",
-    display: "flex",
-    gap: "clamp(0.7rem, 1.5vw, 1rem)",
-    minWidth: "max-content",
-    width: "max-content",
+  canopy: {
+    background:
+      "radial-gradient(circle at 78% 18%, rgba(215, 168, 79, 0.16), transparent 24%), radial-gradient(circle at 14% 86%, rgba(79, 122, 89, 0.34), transparent 30%)",
+    inset: 0,
+    position: "absolute",
   },
-  bubble: {
-    ...slideUi.card,
-    alignItems: "center",
-    borderRadius: "50%",
+  stage: {
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    padding: "clamp(0.65rem, 1.6vw, 1rem)",
-    textAlign: "center",
-    aspectRatio: "1 / 1",
-    flex: "0 0 auto",
-    overflow: "hidden",
+    margin: "0 auto",
+    minHeight: "100%",
+    padding: "clamp(1rem, 2.4vw, 2.35rem)",
+    position: "relative",
+    width: "min(100%, 1440px)",
+    zIndex: 1,
   },
-  bubbleMajor: {
-    background: colors.accentSoft,
-    border: `2px solid ${colors.accent}`,
-    boxShadow: "0 32px 80px rgba(0, 0, 0, 0.34)",
-    width: "clamp(180px, 19vw, 270px)",
+  layout: {
+    display: "grid",
+    gap: "clamp(0.75rem, 1.6vw, 1.15rem)",
+    width: "100%",
   },
-  bubbleMinor: {
-    width: "clamp(145px, 15vw, 205px)",
-  },
-  bubbleTitle: {
+  title: {
     color: colors.textPrimary,
     fontFamily: fonts.display,
-    fontSize: "clamp(0.95rem, 1.2vw, 1.2rem)",
-    lineHeight: 1.02,
-    margin: `0 0 ${spacing.xs} 0`,
-    overflowWrap: "anywhere",
-  },
-  bubbleTitleMajor: {
-    color: colors.accent,
-    fontSize: "clamp(1.2rem, 1.5vw, 1.5rem)",
-    margin: `0 0 ${spacing.xs} 0`,
-  },
-  bubbleBody: {
-    color: colors.textSecondary,
-    fontSize: "clamp(0.68rem, 0.9vw, 0.8rem)",
-    lineHeight: 1.25,
+    fontSize: "clamp(2.35rem, 4.8vw, 4.55rem)",
+    fontWeight: fonts.weightBold,
+    lineHeight: 0.94,
     margin: 0,
-    maxWidth: "90%",
-    overflowWrap: "anywhere",
+    maxWidth: "1320px",
+    overflowWrap: "break-word",
   },
-  bubbleBodyMajor: {
-    fontSize: "clamp(0.74rem, 1vw, 0.9rem)",
+  lede: {
+    color: colors.textSecondary,
+    fontSize: "clamp(0.95rem, 1.5vw, 1.25rem)",
+    lineHeight: 1.38,
+    margin: 0,
+    maxWidth: "880px",
+  },
+  cardGrid: {
+    display: "grid",
+    gap: "clamp(0.85rem, 1.6vw, 1.25rem)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 25rem), 1fr))",
+  },
+  card: {
+    ...slideUi.card,
+    boxSizing: "border-box",
+    minHeight: "clamp(210px, 25vh, 270px)",
+    padding: "clamp(0.9rem, 1.8vw, 1.45rem)",
+  },
+  cardTitle: {
+    color: colors.textPrimary,
+    fontFamily: fonts.display,
+    fontSize: "clamp(1.45rem, 2.45vw, 2.25rem)",
+    lineHeight: 1.04,
+    margin: "0 0 0.75rem 0",
+    overflowWrap: "break-word",
+  },
+  list: {
+    display: "grid",
+    gap: "0.45rem",
+    margin: 0,
+    paddingLeft: "1.1rem",
+  },
+  item: {
+    color: colors.textSecondary,
+    fontSize: "clamp(0.86rem, 1.15vw, 0.98rem)",
     lineHeight: 1.3,
-    maxWidth: "88%",
+    paddingLeft: "0.05rem",
+  },
+  bottomGrid: {
+    display: "grid",
+    gap: "clamp(0.75rem, 1.4vw, 1rem)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 24rem), 1fr))",
+  },
+  sideNote: {
+    background: "rgba(245, 240, 230, 0.07)",
+    border: `1px solid ${colors.border}`,
+    borderRadius: "8px",
+    boxSizing: "border-box",
+    color: colors.textSecondary,
+    fontSize: "clamp(0.86rem, 1.1vw, 0.96rem)",
+    lineHeight: 1.34,
+    margin: 0,
+    padding: "0.75rem 0.85rem",
+  },
+  takeaway: {
+    background: "rgba(79, 122, 89, 0.25)",
+    border: `1px solid ${colors.border}`,
+    borderLeft: `4px solid ${colors.accent}`,
+    borderRadius: "8px",
+    boxSizing: "border-box",
+    color: colors.textPrimary,
+    fontSize: "clamp(0.95rem, 1.45vw, 1.16rem)",
+    fontWeight: fonts.weightMedium,
+    lineHeight: 1.32,
+    margin: 0,
+    padding: "0.85rem 1rem",
   },
 };

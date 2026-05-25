@@ -1,91 +1,193 @@
-import { colors, fonts, spacing } from "../styles/tokens.js";
-import SlideShell from "./SlideShell.jsx";
-import { slideText, slideUi } from "./slideTheme.js";
+import { colors, fonts } from "../styles/tokens.js";
+import { slideUi } from "./slideTheme.js";
 
-const embodimentPoints = [
-  "82 hectares of greenery",
-  "167 years of legacy (since 1859)",
+const heritageSites = [
+  {
+    title: "Heritage Museum",
+    points: [
+      "Located in Holttum Hall, a 1921 conservation building",
+      "Presents over 160 years of the Gardens' history",
+      "Connects colonial botany, rubber research, orchid breeding, and UNESCO heritage",
+    ],
+  },
+  {
+    title: "VIP Orchid Garden",
+    points: [
+      "Displays orchid hybrids named after world leaders, dignitaries, and celebrities",
+      "Represents Singapore's tradition of orchid diplomacy",
+      "Turns living plants into symbols of national identity and international relations",
+    ],
+  },
 ];
 
-const biodiversityPoints = [
-  "More than 10,000 species of flora",
-  "Home to many animals",
-  "Seed Bank",
-  "Examples: the Dell and the primary rainforest",
-];
-
-export const PresenterSlide = ({ photo }) => (
-  <SlideShell
-    photo={photo}
-    align="left"
-  >
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
-    <SmartEnvironmentContent />
-  </SlideShell>
+export const PresenterSlide = () => (
+  <SlideFrame>
+    <SlideContent />
+  </SlideFrame>
 );
 
-export const AudienceSlide = ({ photo }) => (
-  <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
-    <SmartEnvironmentContent />
-  </SlideShell>
+export const AudienceSlide = () => (
+  <SlideFrame>
+    <SlideContent />
+  </SlideFrame>
 );
 
-function SmartEnvironmentContent() {
+function SlideFrame({ children }) {
   return (
-    <div style={styles.grid}>
-      <article style={styles.card}>
-        <h2 style={styles.cardTitle}>Physical Embodiment: City in Nature</h2>
-        <ul style={styles.list}>
-          {embodimentPoints.map((point) => (
-            <li key={point} style={styles.item}>{point}</li>
-          ))}
-        </ul>
-      </article>
-
-      <article style={styles.card}>
-        <h2 style={styles.cardTitle}>Biodiversity and Preservation</h2>
-        <ul style={styles.list}>
-          {biodiversityPoints.map((point) => (
-            <li key={point} style={styles.item}>{point}</li>
-          ))}
-        </ul>
-      </article>
+    <div style={styles.page}>
+      <div style={styles.canopy} />
+      <div style={styles.stage}>{children}</div>
     </div>
   );
 }
 
+function SlideContent() {
+  return (
+    <section style={styles.layout}>
+      <h1 style={styles.title}>Feature 3: Heritage, Culture & Urban Identity</h1>
+      <p style={styles.lede}>
+        Singapore Botanic Gardens reflects Singapore&apos;s history, diplomacy,
+        and identity through living landscapes and heritage spaces.
+      </p>
+
+      <div style={styles.cardGrid}>
+        {heritageSites.map((site) => (
+          <article key={site.title} style={styles.card}>
+            <h2 style={styles.cardTitle}>{site.title}</h2>
+            <ul style={styles.list}>
+              {site.points.map((point) => (
+                <li key={point} style={styles.item}>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div style={styles.bottomGrid}>
+        <p style={styles.sideNote}>
+          Other heritage and cultural spaces include Swan Lake and Symphony
+          Lake.
+        </p>
+        <p style={styles.takeaway}>
+          The Gardens is not only natural heritage, but also a cultural landmark
+          in Singapore&apos;s urban identity.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 const styles = {
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
-    gap: spacing.sm,
+  page: {
+    background:
+      "linear-gradient(135deg, #07110d 0%, #122118 46%, #24271b 100%)",
+    color: colors.textPrimary,
+    fontFamily: fonts.family,
+    minHeight: "100%",
+    overflowX: "hidden",
+    position: "relative",
     width: "100%",
-    maxWidth: "1060px",
+  },
+  canopy: {
+    background:
+      "radial-gradient(circle at 78% 18%, rgba(215, 168, 79, 0.18), transparent 24%), radial-gradient(circle at 14% 88%, rgba(79, 122, 89, 0.3), transparent 30%)",
+    inset: 0,
+    position: "absolute",
+  },
+  stage: {
+    boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    margin: "0 auto",
+    minHeight: "100%",
+    padding: "clamp(0.9rem, 2.2vw, 2.1rem)",
+    position: "relative",
+    width: "min(100%, 1440px)",
+    zIndex: 1,
+  },
+  layout: {
+    display: "grid",
+    gap: "clamp(0.65rem, 1.35vw, 1rem)",
+    width: "100%",
+  },
+  title: {
+    color: colors.textPrimary,
+    fontFamily: fonts.display,
+    fontSize: "clamp(2.2rem, 4.55vw, 4.25rem)",
+    fontWeight: fonts.weightBold,
+    lineHeight: 0.94,
+    margin: 0,
+    maxWidth: "1320px",
+    overflowWrap: "break-word",
+  },
+  lede: {
+    color: colors.textSecondary,
+    fontSize: "clamp(0.9rem, 1.35vw, 1.12rem)",
+    lineHeight: 1.34,
+    margin: 0,
+    maxWidth: "920px",
+  },
+  cardGrid: {
+    display: "grid",
+    gap: "clamp(0.75rem, 1.4vw, 1.1rem)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 25rem), 1fr))",
   },
   card: {
     ...slideUi.card,
     boxSizing: "border-box",
-    padding: "clamp(0.9rem, 2vw, 1.4rem)",
+    minHeight: "clamp(230px, 29vh, 310px)",
+    padding: "clamp(0.85rem, 1.55vw, 1.25rem)",
   },
   cardTitle: {
     color: colors.textPrimary,
     fontFamily: fonts.display,
-    fontSize: "clamp(1.2rem, 2.4vw, 1.8rem)",
-    lineHeight: 1.05,
-    margin: `0 0 ${spacing.xs} 0`,
+    fontSize: "clamp(1.35rem, 2.25vw, 2.05rem)",
+    lineHeight: 1.04,
+    margin: "0 0 0.65rem 0",
+    overflowWrap: "break-word",
   },
   list: {
+    display: "grid",
+    gap: "0.42rem",
     margin: 0,
     paddingLeft: "1.1rem",
-    display: "grid",
-    gap: "0.3rem",
   },
   item: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.88rem, 1.45vw, 1rem)",
-    lineHeight: 1.38,
+    fontSize: "clamp(0.82rem, 1.1vw, 0.96rem)",
+    lineHeight: 1.3,
+    paddingLeft: "0.05rem",
+  },
+  bottomGrid: {
+    display: "grid",
+    gap: "clamp(0.65rem, 1.25vw, 0.9rem)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 24rem), 1fr))",
+  },
+  sideNote: {
+    background: "rgba(245, 240, 230, 0.07)",
+    border: `1px solid ${colors.border}`,
+    borderRadius: "8px",
+    boxSizing: "border-box",
+    color: colors.textSecondary,
+    fontSize: "clamp(0.82rem, 1vw, 0.92rem)",
+    lineHeight: 1.3,
+    margin: 0,
+    padding: "0.7rem 0.8rem",
+  },
+  takeaway: {
+    background: "rgba(79, 122, 89, 0.25)",
+    border: `1px solid ${colors.border}`,
+    borderLeft: `4px solid ${colors.accent}`,
+    borderRadius: "8px",
+    boxSizing: "border-box",
+    color: colors.textPrimary,
+    fontSize: "clamp(0.88rem, 1.25vw, 1rem)",
+    fontWeight: fonts.weightMedium,
+    lineHeight: 1.3,
+    margin: 0,
+    padding: "0.75rem 0.9rem",
   },
 };

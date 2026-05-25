@@ -2,12 +2,16 @@ import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
 
-const governancePoints = [
-  "Well-planned garden zoning and land use",
+const embodimentPoints = [
+  "82 hectares of greenery",
+  "167 years of legacy (since 1859)",
 ];
 
-const peoplePoints = [
-  "Education and outreach center for sustainable practice and plant conservation",
+const biodiversityPoints = [
+  "More than 10,000 species of flora",
+  "Home to many animals",
+  "Seed Bank",
+  "Examples: the Dell and the primary rainforest",
 ];
 
 export const PresenterSlide = ({ photo }) => (
@@ -15,36 +19,36 @@ export const PresenterSlide = ({ photo }) => (
     photo={photo}
     align="left"
   >
-    <p style={slideText.eyebrow}>Minor Contribution</p>
-    <h1 style={slideText.heading}>Smart Governance and Smart People</h1>
-    <MinorContributionGrid />
+    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
+    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
+    <SmartEnvironmentContent />
   </SlideShell>
 );
 
 export const AudienceSlide = ({ photo }) => (
   <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Minor Contribution</p>
-    <h1 style={slideText.heading}>Smart Governance and Smart People</h1>
-    <MinorContributionGrid />
+    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
+    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
+    <SmartEnvironmentContent />
   </SlideShell>
 );
 
-function MinorContributionGrid() {
+function SmartEnvironmentContent() {
   return (
     <div style={styles.grid}>
       <article style={styles.card}>
-        <h2 style={styles.subTitle}>Smart Governance</h2>
+        <h2 style={styles.cardTitle}>Physical Embodiment: City in Nature</h2>
         <ul style={styles.list}>
-          {governancePoints.map((point) => (
+          {embodimentPoints.map((point) => (
             <li key={point} style={styles.item}>{point}</li>
           ))}
         </ul>
       </article>
 
       <article style={styles.card}>
-        <h2 style={styles.subTitle}>Smart People</h2>
+        <h2 style={styles.cardTitle}>Biodiversity and Preservation</h2>
         <ul style={styles.list}>
-          {peoplePoints.map((point) => (
+          {biodiversityPoints.map((point) => (
             <li key={point} style={styles.item}>{point}</li>
           ))}
         </ul>
@@ -56,33 +60,32 @@ function MinorContributionGrid() {
 const styles = {
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
     gap: spacing.sm,
     width: "100%",
-    maxWidth: "1080px",
+    maxWidth: "1060px",
   },
   card: {
     ...slideUi.card,
     boxSizing: "border-box",
     padding: "clamp(0.9rem, 2vw, 1.4rem)",
-    minHeight: "clamp(180px, 30vh, 250px)",
   },
-  subTitle: {
-    color: colors.accent,
+  cardTitle: {
+    color: colors.textPrimary,
     fontFamily: fonts.display,
-    fontSize: "clamp(1.35rem, 2.5vw, 2rem)",
+    fontSize: "clamp(1.2rem, 2.4vw, 1.8rem)",
     lineHeight: 1.05,
     margin: `0 0 ${spacing.xs} 0`,
   },
   list: {
     margin: 0,
-    paddingLeft: "1.15rem",
+    paddingLeft: "1.1rem",
     display: "grid",
     gap: "0.3rem",
   },
   item: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.9rem, 1.4vw, 1rem)",
+    fontSize: "clamp(0.88rem, 1.45vw, 1rem)",
     lineHeight: 1.38,
   },
 };
