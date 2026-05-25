@@ -13,7 +13,6 @@ const experienceSites = [
   },
   {
     title: "Healing Garden",
-    image: xjpFlower,
     points: [
       "2.5-hectare garden with over 400 medicinal plant species",
       "Shows the connection between plants and traditional medicine",
@@ -46,49 +45,57 @@ function SlideFrame({ children }) {
 function SlideContent() {
   return (
     <section style={styles.layout}>
-      <h1 style={styles.title}>
-        Feature 2: Education, Wellness & Human Experience
-      </h1>
-      <p style={styles.lede}>
-        Singapore Botanic Gardens turns plant knowledge into a walkable,
-        sensory, and personal experience.
-      </p>
+      <div style={styles.mainColumn}>
+        <h1 style={styles.title}>
+          Feature 2: Education, Wellness & Human Experience
+        </h1>
+        <p style={styles.lede}>
+          Singapore Botanic Gardens turns plant knowledge into a walkable,
+          sensory, and personal experience.
+        </p>
 
-      <div style={styles.cardGrid}>
-        {experienceSites.map((site) => (
-          <article key={site.title} style={styles.card}>
-            <h2 style={styles.cardTitle}>{site.title}</h2>
-            {site.image && (
-              <img
-                src={site.image}
-                alt="Orchid photograph"
-                style={styles.siteImage}
-                loading="lazy"
-                decoding="async"
-              />
-            )}
-            <ul style={styles.list}>
-              {site.points.map((point) => (
-                <li key={point} style={styles.item}>
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+        <div style={styles.cardGrid}>
+          {experienceSites.map((site) => (
+            <article key={site.title} style={styles.card}>
+              <h2 style={styles.cardTitle}>{site.title}</h2>
+              <ul style={styles.list}>
+                {site.points.map((point) => (
+                  <li key={point} style={styles.item}>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        <div style={styles.bottomGrid}>
+          <p style={styles.sideNote}>
+            Other human-centered experiences include Jacob Ballas Children&apos;s
+            Garden, Ethnobotany Garden, picnics, outdoor events, and social
+            gatherings.
+          </p>
+          <p style={styles.takeaway}>
+            The Gardens is a place where people learn, heal, relax, and connect
+            with nature.
+          </p>
+        </div>
       </div>
 
-      <div style={styles.bottomGrid}>
-        <p style={styles.sideNote}>
-          Other human-centered experiences include Jacob Ballas Children&apos;s
-          Garden, Ethnobotany Garden, picnics, outdoor events, and social
-          gatherings.
+      <aside style={styles.imagePanel}>
+        <p style={styles.imageEyebrow}>Orchid Diplomacy</p>
+        <img
+          src={xjpFlower}
+          alt="Orchid named after Xi Jinping"
+          style={styles.panelImage}
+          loading="lazy"
+          decoding="async"
+        />
+        <p style={styles.imageCaption}>
+          VIP Orchid cultivars symbolize Singapore&apos;s diplomatic ties through
+          living botanical heritage.
         </p>
-        <p style={styles.takeaway}>
-          The Gardens is a place where people learn, heal, relax, and connect
-          with nature.
-        </p>
-      </div>
+      </aside>
     </section>
   );
 }
@@ -125,7 +132,13 @@ const styles = {
   layout: {
     display: "grid",
     gap: "clamp(0.75rem, 1.6vw, 1.15rem)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
     width: "100%",
+  },
+  mainColumn: {
+    display: "grid",
+    gap: "clamp(0.75rem, 1.6vw, 1.15rem)",
+    minWidth: 0,
   },
   title: {
     color: colors.textPrimary,
@@ -169,15 +182,6 @@ const styles = {
     margin: 0,
     paddingLeft: "1.1rem",
   },
-  siteImage: {
-    width: "100%",
-    height: "clamp(130px, 18vh, 190px)",
-    objectFit: "cover",
-    borderRadius: "8px",
-    border: `1px solid ${colors.border}`,
-    marginBottom: "0.7rem",
-    boxSizing: "border-box",
-  },
   item: {
     color: colors.textSecondary,
     fontSize: "clamp(0.86rem, 1.15vw, 0.98rem)",
@@ -212,5 +216,35 @@ const styles = {
     lineHeight: 1.32,
     margin: 0,
     padding: "0.85rem 1rem",
+  },
+  imagePanel: {
+    ...slideUi.card,
+    alignSelf: "stretch",
+    boxSizing: "border-box",
+    display: "grid",
+    gap: "0.7rem",
+    padding: "clamp(0.85rem, 1.6vw, 1.25rem)",
+    minWidth: 0,
+  },
+  imageEyebrow: {
+    margin: 0,
+    color: colors.accent,
+    fontSize: "0.8rem",
+    fontWeight: fonts.weightBold,
+    textTransform: "uppercase",
+  },
+  panelImage: {
+    width: "100%",
+    height: "clamp(220px, 38vh, 420px)",
+    objectFit: "cover",
+    borderRadius: "8px",
+    border: `1px solid ${colors.border}`,
+    boxSizing: "border-box",
+  },
+  imageCaption: {
+    margin: 0,
+    color: colors.textSecondary,
+    fontSize: "clamp(0.84rem, 1.1vw, 0.95rem)",
+    lineHeight: 1.34,
   },
 };
