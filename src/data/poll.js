@@ -1,10 +1,9 @@
 import xjpFlower from "../assets/photos/XJPflower.png";
 
-// Hardcoded poll mapping by slide id (not array position).
-// Slide id 1  -> Gardens preference poll
-// Slide id 12 -> Orchid image poll
-const POLLS_BY_SLIDE = {
-  1: {
+// Hardcoded poll mapping by presentation page number (1-based).
+// This keeps behavior stable even if internal slide ids are reordered.
+const POLLS_BY_PAGE = {
+  2: {
     question: "Which part of the Gardens would you most want to explore?",
     options: [
       "National Orchid Garden",
@@ -25,12 +24,16 @@ const POLLS_BY_SLIDE = {
   },
 };
 
-export function getPollForSlide(slideIndex) {
-  return POLLS_BY_SLIDE[slideIndex] ?? null;
+export function getPollForPage(pageNumber) {
+  return POLLS_BY_PAGE[pageNumber] ?? null;
 }
 
-export function getPollSlideIndexes() {
-  return Object.keys(POLLS_BY_SLIDE).map((key) => Number(key));
+export function hasPollForPage(pageNumber) {
+  return Boolean(getPollForPage(pageNumber));
 }
 
-export default POLLS_BY_SLIDE;
+export function getPollPageNumbers() {
+  return Object.keys(POLLS_BY_PAGE).map((key) => Number(key));
+}
+
+export default POLLS_BY_PAGE;

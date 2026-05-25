@@ -7,9 +7,8 @@ export default function AudiencePage({ socket, presentationState }) {
   const { currentSlide, pollOpen } = presentationState;
   const current = slides[currentSlide] ?? slides[0];
   const SlideComponent = current.audienceView;
-  const currentSlideId = current.id;
-  const canShowPoll = isPollEnabledForSlide(currentSlideId);
-  const poll = getPollForSlide(currentSlideId);
+  const canShowPoll = isPollEnabledForSlide(currentSlide);
+  const poll = getPollForSlide(currentSlide);
 
   return (
     <div style={styles.wrapper}>

@@ -1,9 +1,17 @@
-import { getPollForSlide, getPollSlideIndexes } from "./poll.js";
+import { getPollForPage, getPollPageNumbers, hasPollForPage } from "./poll.js";
 
-export const POLL_SLIDE_INDEXES = getPollSlideIndexes();
+export const POLL_PAGE_NUMBERS = getPollPageNumbers();
 
-export function isPollEnabledForSlide(slideIndex) {
-  return Boolean(getPollForSlide(slideIndex));
+export function getPageNumberFromSlideIndex(slideIndex) {
+  return slideIndex + 1;
 }
 
-export { getPollForSlide };
+export function isPollEnabledForSlide(slideIndex) {
+  const pageNumber = getPageNumberFromSlideIndex(slideIndex);
+  return hasPollForPage(pageNumber);
+}
+
+export function getPollForSlide(slideIndex) {
+  const pageNumber = getPageNumberFromSlideIndex(slideIndex);
+  return getPollForPage(pageNumber);
+}

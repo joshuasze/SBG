@@ -1,16 +1,35 @@
 import state from "../state/roomState.js";
 
 const PRESENTER_PASSWORD = "sbggpa";
-const POLL_SLIDE_IDS = new Set([1, 12]);
-const SLIDE_IDS_IN_ORDER = [0, 1, 2, 3, 10, 11, 12, 4, 5, 6, 7, 8, 9];
+const POLLS_BY_PAGE = {
+  2: {
+    options: new Set([
+      "National Orchid Garden",
+      "Rain Forest trail",
+      "Heritage trees",
+      "Lakes and lawns",
+    ]),
+  },
+  12: {
+    options: new Set([
+      "Xi Jinping",
+      "Pope Francis",
+      "Obama",
+      "Jonathan",
+    ]),
+  },
+};
 
-function getSlideIdFromIndex(slideIndex) {
-  return SLIDE_IDS_IN_ORDER[slideIndex];
+function getCurrentPageNumber() {
+  return state.currentSlide + 1;
 }
 
-function isPollEnabledForSlideIndex(slideIndex) {
-  const slideId = getSlideIdFromIndex(slideIndex);
-  return POLL_SLIDE_IDS.has(slideId);
+function getPollForCurrentPage() {
+  return POLLS_BY_PAGE[getCurrentPageNumber()] ?? null;
+}
+
+function isPollEnabledForCurrentPage() {
+  return Boolean(getPollForCurrentPage());
 }
 
 export default function presentationSocket(io, socket) {
@@ -34,8 +53,9 @@ export default function presentationSocket(io, socket) {
     if (!Number.isInteger(slideIndex) || slideIndex < 0) return;
 
     state.currentSlide = slideIndex;
-    state.pollOpen = false;     // always close poll on slide change
-    state.pollVotes = {};       // reset votes for the new slide
+    // Keep poll closed on every page transition; votes are per-page session.
+    state.pollOpen = false;
+    state.pollVotes = {};
 
     // Broadcast to EVERYONE (including presenter) so all screens stay in sync
     io.emit("slide_changed", { slideIndex });
@@ -48,7 +68,7 @@ export default function presentationSocket(io, socket) {
   socket.on("poll_toggled", ({ open, presenterPassword } = {}) => {
     if (!hasPresenterAccess(presenterPassword)) return;
     if (typeof open !== "boolean") return;
-    if (!isPollEnabledForSlideIndex(state.currentSlide)) return;
+    if (!isPollEnabledForCurrentPage()) return;
 
     state.pollOpen = open;
 
@@ -62,6 +82,8 @@ export default function presentationSocket(io, socket) {
   socket.on("poll_vote", ({ answer } = {}) => {
     if (!state.pollOpen) return; // ignore votes if poll is closed
     if (typeof answer !== "string" || answer.trim() === "") return;
+    const poll = getPollForCurrentPage();
+    if (!poll || !poll.options.has(answer)) return;
 
     // Count the vote
     state.pollVotes[answer] = (state.pollVotes[answer] || 0) + 1;
