@@ -1,5 +1,15 @@
 import { colors, fonts } from "../styles/tokens.js";
 import { slideText, slideUi } from "./slideTheme.js";
+import rainforestPath from "../assets/photos/on audience f1/slide5_g .jpg";
+import palmPath from "../assets/photos/on audience f1/slide5_biooo.jpg";
+import orchidPath from "../assets/photos/on audience f1/IMG_7567.jpg";
+import biodiversityPath from "../assets/photos/on audience f1/slide5_biodiversity.jpg";
+import orchidWalkPath from "../assets/photos/on audience f1/IMG_7569.jpg";
+import leafPath from "../assets/photos/on audience f1/slide5_bio.jpg";
+import canopyPath from "../assets/photos/on audience f1/IMG_7581.jpg";
+import trailPath from "../assets/photos/on audience f1/slide5_a.jpg";
+import gardenPath from "../assets/photos/on audience f1/IMG_7594.jpg";
+import chickenPath from "../assets/photos/on audience f1/slide5_chicken.jpg";
 
 const featuredSites = [
   {
@@ -20,6 +30,19 @@ const featuredSites = [
   },
 ];
 
+const audiencePhotos = [
+  { src: rainforestPath, alt: "Rainforest greenery at Singapore Botanic Gardens", variant: "wide" },
+  { src: palmPath, alt: "Tall palm fronds in the conservation area", variant: "tall" },
+  { src: orchidPath, alt: "Visitor path surrounded by tropical planting", variant: "large" },
+  { src: biodiversityPath, alt: "Biodiversity sign among garden plants", variant: "tall" },
+  { src: orchidWalkPath, alt: "Garden walkway with dense planting", variant: "" },
+  { src: leafPath, alt: "Close view of protected plant life", variant: "tall" },
+  { src: canopyPath, alt: "Green canopy inside Singapore Botanic Gardens", variant: "large" },
+  { src: trailPath, alt: "Feature 1 garden trail signage", variant: "tall" },
+  { src: gardenPath, alt: "Dense tropical garden planting", variant: "tall" },
+  { src: chickenPath, alt: "Wildlife in the Gardens", variant: "" },
+];
+
 export const PresenterSlide = () => (
   <SlideFrame>
     <SlideContent />
@@ -28,7 +51,7 @@ export const PresenterSlide = () => (
 
 export const AudienceSlide = () => (
   <SlideFrame>
-    <SlideContent />
+    <AudiencePhotoCollage />
   </SlideFrame>
 );
 
@@ -81,6 +104,29 @@ function SlideContent() {
   );
 }
 
+function AudiencePhotoCollage() {
+  return (
+    <section style={styles.audienceLayout} aria-label="Feature 1 photo collage">
+      <div style={styles.audienceHeader}>
+        <p style={styles.audienceKicker}>Feature 1</p>
+        <h1 style={styles.audienceTitle}>Conservation & Biodiversity</h1>
+      </div>
+      <div className="audience-photo-collage">
+        {audiencePhotos.map((photo) => (
+          <figure
+            className={`audience-photo-collage__item ${
+              photo.variant ? `is-${photo.variant}` : ""
+            }`}
+            key={photo.src}
+          >
+            <img src={photo.src} alt={photo.alt} loading="eager" />
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const styles = {
   page: {
     background:
@@ -114,6 +160,31 @@ const styles = {
     display: "grid",
     gap: "clamp(0.75rem, 1.6vw, 1.15rem)",
     width: "100%",
+  },
+  audienceLayout: {
+    display: "grid",
+    gap: "clamp(0.85rem, 1.5vw, 1.25rem)",
+    width: "100%",
+  },
+  audienceHeader: {
+    alignItems: "end",
+    display: "grid",
+    gap: "0.35rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 19rem), 1fr))",
+  },
+  audienceKicker: {
+    color: colors.accent,
+    fontSize: "clamp(0.82rem, 1.45vw, 0.98rem)",
+    fontWeight: fonts.weightBold,
+    margin: 0,
+    textTransform: "uppercase",
+  },
+  audienceTitle: {
+    ...slideText.heading,
+    fontSize: "clamp(2rem, 4.5vw, 4.25rem)",
+    lineHeight: 0.94,
+    margin: 0,
+    overflowWrap: "break-word",
   },
   title: {
     ...slideText.heading,
