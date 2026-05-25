@@ -1,23 +1,10 @@
 import xjpFlower from "../assets/photos/XJPflower.png";
+import { POLL_DEFINITIONS_BY_PAGE } from "./pollDefinitions.js";
 
-// Hardcoded poll mapping by presentation page number (1-based).
-// This keeps behavior stable even if internal slide ids are reordered.
 const POLLS_BY_PAGE = {
-  3: {
-    question: "Can you find an animal in this picture?",
-    options: [
-      "Yes, I found it",
-      "Not yet",
-    ],
-  },
+  ...POLL_DEFINITIONS_BY_PAGE,
   12: {
-    question: "Who is this orchid named after?",
-    options: [
-      "Xi Jinping",
-      "Pope Francis",
-      "Obama",
-      "Jonathan",
-    ],
+    ...POLL_DEFINITIONS_BY_PAGE[12],
     image: xjpFlower,
   },
 };
