@@ -1,7 +1,7 @@
 import slides from "../data/index.js";
 import { isPollEnabledForSlide } from "../data/pollConfig.js";
 import PollCard from "../components/pollcard.jsx";
-import { colors, fonts } from "../styles/tokens.js";
+import { colors, fonts, spacing } from "../styles/tokens.js";
 
 export default function AudiencePage({ socket, presentationState }) {
   const { currentSlide, pollOpen } = presentationState;
