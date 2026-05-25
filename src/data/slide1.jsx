@@ -5,7 +5,7 @@ import { slideText, slideUi } from "./slideTheme.js";
 const items = [
   ["01", "Intro", "Set the context and framing of the Singapore Botanic Gardens."],
   ["02", "Key Features", "Highlight the major characteristics and identity of the Gardens."],
-  ["03", "Contribution to Smart City", "Show how the Gardens supports Singapore&apos;s Smart Nation vision."],
+  ["03", "Contribution to Smart City", "Show how the Gardens supports Singapore's Smart Nation vision."],
   ["04", "Comparison", "Compare the Gardens with other city green spaces and benchmarks."],
   ["05", "Features Missing Out - Recommendations", "Identify gaps and propose practical next-step improvements."],
 ];
