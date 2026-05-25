@@ -4,7 +4,14 @@ export default function SlideShell({ photo, align = "center", children, note }) 
   return (
     <div style={styles.page}>
       {photo ? (
-        <img src={photo} alt="" style={styles.photo} />
+        <img
+          src={photo}
+          alt=""
+          style={styles.photo}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
       ) : (
         <div style={styles.fallback} />
       )}

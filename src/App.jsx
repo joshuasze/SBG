@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { socket } from "./lib/socket.js";
+import { preloadAllSlidePhotosInBackground, preloadSlidePhotos } from "./assets/photos.js";
 import PresenterPage from "./pages/PresenterPage.jsx";
 import AudiencePage from "./pages/AudiencePage.jsx";
 
@@ -77,6 +78,20 @@ export default function App() {
       socket.off("poll_results", handlePollResults);
     };
   }, []);
+
+  useEffect(() => {
+    // Keep current + next slides warm so page changes are not blocked by image fetch/decode.
+    preloadSlidePhotos([
+      presentationState.currentSlide,
+      presentationState.currentSlide + 1,
+      presentationState.currentSlide + 2,
+    ]);
+  }, [presentationState.currentSlide]);
+
+  useEffect(() => {
+    // Queue the whole deck in the background for smoother later navigation.
+    preloadAllSlidePhotosInBackground(presentationState.currentSlide);
+  }, [connected, presentationState.currentSlide]);
 
   // Decide which view to show based on the URL
   // Presenter opens:  http://localhost:5173/presenter
