@@ -1,10 +1,11 @@
 import { useState } from "react";
-import poll from "../data/poll.js";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
-export default function PollCard({ socket }) {
+export default function PollCard({ socket, poll }) {
   const [selected, setSelected] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+
+  if (!poll) return null;
 
   function submitVote(option) {
     if (submitted) return;
@@ -26,6 +27,16 @@ export default function PollCard({ socket }) {
   // Before voting — show the question and buttons
   return (
     <div style={styles.card}>
+      {poll.image && (
+        <img
+          src={poll.image}
+          alt="Orchid for the poll question"
+          style={styles.pollImage}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
+      )}
       <p style={styles.question}>{poll.question}</p>
       <div style={styles.options}>
         {poll.options.map((option) => (
@@ -62,6 +73,15 @@ const styles = {
     fontWeight: fonts.weightBold,
     color: colors.textPrimary,
     margin: 0,
+    textAlign: "center",
+  },
+  pollImage: {
+    width: "100%",
+    maxHeight: "min(34vh, 300px)",
+    objectFit: "cover",
+    borderRadius: radii.md,
+    border: `1px solid ${colors.border}`,
+    boxSizing: "border-box",
   },
   options: {
     display: "grid",

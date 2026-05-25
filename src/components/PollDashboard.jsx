@@ -1,7 +1,8 @@
-import poll from "../data/poll.js";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
-export default function PollDashboard({ votes = {} }) {
+export default function PollDashboard({ votes = {}, poll }) {
+  if (!poll) return null;
+
   const totalVotes = Object.values(votes).reduce((sum, count) => sum + count, 0);
   const maxVotes = Math.max(1, ...poll.options.map((option) => votes[option] || 0));
 

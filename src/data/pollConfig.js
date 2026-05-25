@@ -1,6 +1,9 @@
-// Page 2 in the presenter UI is 1-based, so it maps to slide index 1.
-export const POLL_SLIDE_INDEX = 1;
+import { getPollForSlide, getPollSlideIndexes } from "./poll.js";
+
+export const POLL_SLIDE_INDEXES = getPollSlideIndexes();
 
 export function isPollEnabledForSlide(slideIndex) {
-  return slideIndex === POLL_SLIDE_INDEX;
+  return Boolean(getPollForSlide(slideIndex));
 }
+
+export { getPollForSlide };

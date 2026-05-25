@@ -1,10 +1,10 @@
 import state from "../state/roomState.js";
 
 const PRESENTER_PASSWORD = "sbggpa";
-const POLL_SLIDE_INDEX = 1;
+const POLL_SLIDE_INDEXES = new Set([1, 11]);
 
 function isPollEnabledForSlide(slideIndex) {
-  return slideIndex === POLL_SLIDE_INDEX;
+  return POLL_SLIDE_INDEXES.has(slideIndex);
 }
 
 export default function presentationSocket(io, socket) {

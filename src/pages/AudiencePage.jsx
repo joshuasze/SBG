@@ -1,5 +1,5 @@
 import slides from "../data/index.js";
-import { isPollEnabledForSlide } from "../data/pollConfig.js";
+import { getPollForSlide, isPollEnabledForSlide } from "../data/pollConfig.js";
 import PollCard from "../components/pollcard.jsx";
 import { colors, fonts } from "../styles/tokens.js";
 
@@ -8,6 +8,7 @@ export default function AudiencePage({ socket, presentationState }) {
   const current = slides[currentSlide] ?? slides[0];
   const SlideComponent = current.audienceView;
   const canShowPoll = isPollEnabledForSlide(currentSlide);
+  const poll = getPollForSlide(currentSlide);
 
   return (
     <div style={styles.wrapper}>
@@ -17,10 +18,10 @@ export default function AudiencePage({ socket, presentationState }) {
       </div>
 
       {/* Poll appears as a centered popup when active */}
-      {canShowPoll && pollOpen && (
+      {canShowPoll && pollOpen && poll && (
         <div style={styles.pollOverlay}>
           <div style={styles.pollDialog}>
-            <PollCard socket={socket} />
+            <PollCard socket={socket} poll={poll} />
           </div>
         </div>
       )}

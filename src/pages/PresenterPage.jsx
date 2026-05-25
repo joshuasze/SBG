@@ -1,5 +1,5 @@
 import slides from "../data/index.js";
-import { isPollEnabledForSlide } from "../data/pollConfig.js";
+import { getPollForSlide, isPollEnabledForSlide } from "../data/pollConfig.js";
 import PollDashboard from "../components/PollDashboard.jsx";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
@@ -28,6 +28,7 @@ export default function PresenterPage({ socket, presentationState, presenterPass
   const current = slides[currentSlide] ?? slides[0];
   const SlideComponent = current.presenterView;
   const pollAllowedOnSlide = isPollEnabledForSlide(currentSlide);
+  const poll = getPollForSlide(currentSlide);
   const showPoll = pollAllowedOnSlide && pollOpen;
 
   return (
@@ -37,7 +38,7 @@ export default function PresenterPage({ socket, presentationState, presenterPass
         <SlideComponent photo={current.photo} />
       </div>
 
-      {showPoll && <PollDashboard votes={pollVotes} />}
+      {showPoll && poll && <PollDashboard votes={pollVotes} poll={poll} />}
 
       {/* Control bar at the bottom */}
       <div style={styles.controlBar}>
