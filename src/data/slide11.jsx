@@ -1,5 +1,6 @@
 import { colors, fonts } from "../styles/tokens.js";
 import { slideUi } from "./slideTheme.js";
+import xjpFlower from "../assets/photos/XJPflower.png";
 
 const experienceSites = [
   {
@@ -12,6 +13,7 @@ const experienceSites = [
   },
   {
     title: "Healing Garden",
+    image: xjpFlower,
     points: [
       "2.5-hectare garden with over 400 medicinal plant species",
       "Shows the connection between plants and traditional medicine",
@@ -56,6 +58,15 @@ function SlideContent() {
         {experienceSites.map((site) => (
           <article key={site.title} style={styles.card}>
             <h2 style={styles.cardTitle}>{site.title}</h2>
+            {site.image && (
+              <img
+                src={site.image}
+                alt="Orchid photograph"
+                style={styles.siteImage}
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             <ul style={styles.list}>
               {site.points.map((point) => (
                 <li key={point} style={styles.item}>
@@ -157,6 +168,15 @@ const styles = {
     gap: "0.45rem",
     margin: 0,
     paddingLeft: "1.1rem",
+  },
+  siteImage: {
+    width: "100%",
+    height: "clamp(130px, 18vh, 190px)",
+    objectFit: "cover",
+    borderRadius: "8px",
+    border: `1px solid ${colors.border}`,
+    marginBottom: "0.7rem",
+    boxSizing: "border-box",
   },
   item: {
     color: colors.textSecondary,
