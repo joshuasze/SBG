@@ -3,8 +3,8 @@ import { POLL_DEFINITIONS_BY_PAGE } from "./pollDefinitions.js";
 
 const POLLS_BY_PAGE = {
   ...POLL_DEFINITIONS_BY_PAGE,
-  12: {
-    ...POLL_DEFINITIONS_BY_PAGE[12],
+  11: {
+    ...POLL_DEFINITIONS_BY_PAGE[11],
     image: xjpFlower,
   },
 };

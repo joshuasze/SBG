@@ -4,7 +4,7 @@ import { POLL_DEFINITIONS_BY_PAGE } from "../../../src/data/pollDefinitions.js";
 const PRESENTER_PASSWORD = "sbggpa";
 const POLLS_BY_PAGE = Object.fromEntries(
   Object.entries(POLL_DEFINITIONS_BY_PAGE).map(([pageNumber, poll]) => [
-    pageNumber,
+    Number(pageNumber),
     { options: new Set(poll.options) },
   ]),
 );
