@@ -79,13 +79,13 @@ const styles = {
     fontFamily: fonts.family,
     overflow: "hidden",
   },
-  // Scrollable slide region with bottom padding so fixed controls never cover content.
+  // Scrollable slide region. The control bar lives in normal layout below it,
+  // so desktop slides can fit without the bar covering their bottom edge.
   slideArea: {
     flex: 1,
     minHeight: 0,
     overflowY: "auto",
     WebkitOverflowScrolling: "touch",
-    paddingBottom: "clamp(5.5rem, 13vh, 8rem)",
     boxSizing: "border-box",
   },
   controlBar: {
@@ -101,10 +101,7 @@ const styles = {
     background: "rgba(11, 23, 18, 0.96)",
     borderTop: `1px solid ${colors.border}`,
     boxSizing: "border-box",
-    position: "fixed",
-    left: 0,
-    right: 0,
-    bottom: 0,
+    flex: "0 0 auto",
     zIndex: 30,
   },
   btn: {
