@@ -25,7 +25,7 @@ export const AudienceSlide = ({ photo }) => (
 const styles = {
   uploadHint: {
     color: colors.accent,
-    fontSize: "0.95rem",
+    fontSize: "1.07rem",
     margin: `${spacing.lg} 0 0 0`,
   },
 };

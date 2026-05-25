@@ -45,7 +45,7 @@ const styles = {
   },
   body: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.9rem, 2vw, 1rem)",
+    fontSize: "clamp(1.02rem, 2.15vw, 1.12rem)",
     lineHeight: fonts.lineHeight,
     margin: 0,
   },

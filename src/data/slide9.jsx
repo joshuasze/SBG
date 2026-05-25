@@ -97,7 +97,7 @@ const styles = {
   },
   item: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.85rem, 1.3vw, 0.97rem)",
+    fontSize: "clamp(0.97rem, 1.45vw, 1.09rem)",
     lineHeight: 1.34,
   },
 };

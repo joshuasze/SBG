@@ -3,7 +3,7 @@ import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 export const slideText = {
   eyebrow: {
     color: colors.accent,
-    fontSize: "clamp(0.75rem, 1.6vw, 0.85rem)",
+    fontSize: "clamp(0.87rem, 1.75vw, 0.97rem)",
     fontWeight: fonts.weightBold,
     letterSpacing: "0.16em",
     margin: `0 0 ${spacing.sm} 0`,
@@ -28,7 +28,7 @@ export const slideText = {
   },
   subtitle: {
     color: colors.textSecondary,
-    fontSize: "clamp(1rem, 2vw, 1.45rem)",
+    fontSize: "clamp(1.12rem, 2.15vw, 1.57rem)",
     lineHeight: fonts.lineHeight,
     margin: 0,
     maxWidth: "720px",

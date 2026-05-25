@@ -90,7 +90,7 @@ const styles = {
   summaryItem: {
     color: colors.textPrimary,
     fontFamily: fonts.display,
-    fontSize: "clamp(1rem, 1.7vw, 1.3rem)",
+    fontSize: "clamp(1.24rem, 2.01vw, 1.54rem)",
     lineHeight: 1.15,
   },
   tableCard: {
@@ -119,7 +119,7 @@ const styles = {
   th: {
     color: colors.textPrimary,
     textAlign: "left",
-    fontSize: "clamp(0.8rem, 1.1vw, 0.9rem)",
+    fontSize: "clamp(1.05rem, 1.38vw, 1.15rem)",
     fontWeight: fonts.weightBold,
     padding: "0.42rem 0.45rem",
     border: `1px solid ${colors.border}`,
@@ -129,7 +129,7 @@ const styles = {
   rowHead: {
     color: colors.textPrimary,
     textAlign: "left",
-    fontSize: "clamp(0.78rem, 1.05vw, 0.88rem)",
+    fontSize: "clamp(1.03rem, 1.33vw, 1.13rem)",
     fontWeight: fonts.weightBold,
     padding: "0.4rem 0.45rem",
     border: `1px solid ${colors.border}`,
@@ -138,7 +138,7 @@ const styles = {
   },
   td: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.77rem, 1.02vw, 0.87rem)",
+    fontSize: "clamp(1.02rem, 1.3vw, 1.12rem)",
     lineHeight: 1.24,
     padding: "0.4rem 0.45rem",
     border: `1px solid ${colors.border}`,

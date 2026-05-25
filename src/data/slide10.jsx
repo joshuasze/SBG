@@ -106,7 +106,7 @@ const styles = {
   },
   item: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.88rem, 1.4vw, 1rem)",
+    fontSize: "clamp(1rem, 1.55vw, 1.12rem)",
     lineHeight: 1.36,
   },
   imagePanel: {
@@ -120,7 +120,7 @@ const styles = {
   imageEyebrow: {
     margin: 0,
     color: colors.accent,
-    fontSize: "0.75rem",
+    fontSize: "0.87rem",
     fontWeight: fonts.weightBold,
     textTransform: "uppercase",
     letterSpacing: "0.08em",

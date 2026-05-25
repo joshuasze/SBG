@@ -70,7 +70,7 @@ const styles = {
   },
   itemBody: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.78rem, 1.2vw, 0.92rem)",
+    fontSize: "clamp(0.9rem, 1.35vw, 1.04rem)",
     lineHeight: 1.35,
     margin: 0,
   },
