@@ -1,4 +1,5 @@
 import slides from "../data/index.js";
+import { isPollEnabledForSlide } from "../data/pollConfig.js";
 import PollDashboard from "../components/PollDashboard.jsx";
 import { colors, fonts, spacing, radii } from "../styles/tokens.js";
 
@@ -26,6 +27,8 @@ export default function PresenterPage({ socket, presentationState, presenterPass
 
   const current = slides[currentSlide] ?? slides[0];
   const SlideComponent = current.presenterView;
+  const pollAllowedOnSlide = isPollEnabledForSlide(currentSlide);
+  const showPoll = pollAllowedOnSlide && pollOpen;
 
   return (
     <div style={styles.wrapper}>
@@ -34,7 +37,7 @@ export default function PresenterPage({ socket, presentationState, presenterPass
         <SlideComponent photo={current.photo} />
       </div>
 
-      {pollOpen && <PollDashboard votes={pollVotes} />}
+      {showPoll && <PollDashboard votes={pollVotes} />}
 
       {/* Control bar at the bottom */}
       <div style={styles.controlBar}>
@@ -46,17 +49,19 @@ export default function PresenterPage({ socket, presentationState, presenterPass
 
         <button style={styles.btn} onClick={nextSlide}>Next</button>
 
-        <button
-          style={{
-            ...styles.btn,
-            background: pollOpen ? colors.danger : colors.accent,
-            color: pollOpen ? colors.textPrimary : colors.bgDark,
-            marginLeft: spacing.lg,
-          }}
-          onClick={togglePoll}
-        >
-          {pollOpen ? "Close Poll" : "Open Poll"}
-        </button>
+        {pollAllowedOnSlide && (
+          <button
+            style={{
+              ...styles.btn,
+              background: pollOpen ? colors.danger : colors.accent,
+              color: pollOpen ? colors.textPrimary : colors.bgDark,
+              marginLeft: spacing.lg,
+            }}
+            onClick={togglePoll}
+          >
+            {pollOpen ? "Close Poll" : "Open Poll"}
+          </button>
+        )}
 
       </div>
     </div>

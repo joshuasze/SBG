@@ -1,6 +1,11 @@
 import state from "../state/roomState.js";
 
 const PRESENTER_PASSWORD = "sbggpa";
+const POLL_SLIDE_INDEX = 1;
+
+function isPollEnabledForSlide(slideIndex) {
+  return slideIndex === POLL_SLIDE_INDEX;
+}
 
 export default function presentationSocket(io, socket) {
   console.log(`✅ Client connected: ${socket.id}`);
@@ -37,6 +42,7 @@ export default function presentationSocket(io, socket) {
   socket.on("poll_toggled", ({ open, presenterPassword } = {}) => {
     if (!hasPresenterAccess(presenterPassword)) return;
     if (typeof open !== "boolean") return;
+    if (!isPollEnabledForSlide(state.currentSlide)) return;
 
     state.pollOpen = open;
 
