@@ -10,7 +10,7 @@ export const PresenterSlide = ({ photo }) => (
     <p style={slideText.eyebrow}>Audience Check-In</p>
     <h1 style={slideText.heading}>Quick Poll</h1>
     <div style={styles.pollPlacard}>
-      <p style={styles.question}>Which part of the Gardens would you most want to explore?</p>
+      <p style={styles.question}>Can you find an animal in this picture?</p>
       <p style={styles.body}>Open the poll when you are ready to collect live responses.</p>
     </div>
   </SlideShell>
@@ -22,7 +22,7 @@ export const AudienceSlide = ({ photo }) => (
     <h1 style={slideText.heading}>Quick Poll</h1>
     <div style={styles.pollPlacard}>
       <p style={styles.question}>Waiting for the presenter to open the poll...</p>
-      <p style={styles.body}>Your choices will appear below when the poll is live.</p>
+      <p style={styles.body}>Look closely at the picture, then answer when the poll is live.</p>
     </div>
   </SlideShell>
 );

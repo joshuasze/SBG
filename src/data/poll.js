@@ -3,13 +3,11 @@ import xjpFlower from "../assets/photos/XJPflower.png";
 // Hardcoded poll mapping by presentation page number (1-based).
 // This keeps behavior stable even if internal slide ids are reordered.
 const POLLS_BY_PAGE = {
-  2: {
-    question: "Which part of the Gardens would you most want to explore?",
+  3: {
+    question: "Can you find an animal in this picture?",
     options: [
-      "National Orchid Garden",
-      "Rain Forest trail",
-      "Heritage trees",
-      "Lakes and lawns",
+      "Yes, I found it",
+      "Not yet",
     ],
   },
   12: {
