@@ -37,9 +37,10 @@ const styles = {
     background: colors.bgDark,
     color: colors.textPrimary,
     fontFamily: fonts.family,
-    minHeight: "100%",
+    minHeight: "100svh",
     position: "relative",
     width: "100%",
+    overflow: "hidden",
   },
   photo: {
     height: "100%",

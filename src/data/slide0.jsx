@@ -18,11 +18,7 @@ export const PresenterSlide = ({ photo }) => (
 
 export const AudienceSlide = ({ photo }) => (
   <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Singapore Botanic Gardens</p>
-    <h1 style={slideText.title}>A Living Heritage Garden</h1>
-    <p style={slideText.subtitle}>
-      Nature, science, culture, and public life growing together in the heart of Singapore.
-    </p>
+    <h1 style={slideText.title}>Welcome to the Singapore Botanic Gardens</h1>
   </SlideShell>
 );
 
