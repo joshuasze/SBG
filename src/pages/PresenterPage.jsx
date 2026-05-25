@@ -27,8 +27,9 @@ export default function PresenterPage({ socket, presentationState, presenterPass
 
   const current = slides[currentSlide] ?? slides[0];
   const SlideComponent = current.presenterView;
-  const pollAllowedOnSlide = isPollEnabledForSlide(currentSlide);
-  const poll = getPollForSlide(currentSlide);
+  const currentSlideId = current.id;
+  const pollAllowedOnSlide = isPollEnabledForSlide(currentSlideId);
+  const poll = getPollForSlide(currentSlideId);
   const showPoll = pollAllowedOnSlide && pollOpen;
 
   return (

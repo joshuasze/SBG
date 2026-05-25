@@ -1,10 +1,16 @@
 import state from "../state/roomState.js";
 
 const PRESENTER_PASSWORD = "sbggpa";
-const POLL_SLIDE_INDEXES = new Set([1, 11]);
+const POLL_SLIDE_IDS = new Set([1, 12]);
+const SLIDE_IDS_IN_ORDER = [0, 1, 2, 3, 10, 11, 12, 4, 5, 6, 7, 8, 9];
 
-function isPollEnabledForSlide(slideIndex) {
-  return POLL_SLIDE_INDEXES.has(slideIndex);
+function getSlideIdFromIndex(slideIndex) {
+  return SLIDE_IDS_IN_ORDER[slideIndex];
+}
+
+function isPollEnabledForSlideIndex(slideIndex) {
+  const slideId = getSlideIdFromIndex(slideIndex);
+  return POLL_SLIDE_IDS.has(slideId);
 }
 
 export default function presentationSocket(io, socket) {
@@ -42,7 +48,7 @@ export default function presentationSocket(io, socket) {
   socket.on("poll_toggled", ({ open, presenterPassword } = {}) => {
     if (!hasPresenterAccess(presenterPassword)) return;
     if (typeof open !== "boolean") return;
-    if (!isPollEnabledForSlide(state.currentSlide)) return;
+    if (!isPollEnabledForSlideIndex(state.currentSlide)) return;
 
     state.pollOpen = open;
 

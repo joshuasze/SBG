@@ -1,8 +1,8 @@
 import xjpFlower from "../assets/photos/XJPflower.png";
 
-// Hardcoded poll mapping by slide index (0-based).
-// Page 2  -> slide index 1
-// Page 12 -> slide index 11
+// Hardcoded poll mapping by slide id (not array position).
+// Slide id 1  -> Gardens preference poll
+// Slide id 12 -> Orchid image poll
 const POLLS_BY_SLIDE = {
   1: {
     question: "Which part of the Gardens would you most want to explore?",
@@ -13,7 +13,7 @@ const POLLS_BY_SLIDE = {
       "Lakes and lawns",
     ],
   },
-  11: {
+  12: {
     question: "Who is this orchid named after?",
     options: [
       "Xi Jinping",
