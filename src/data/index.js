@@ -16,6 +16,10 @@ import { PresenterSlide as P12, AudienceSlide as A12 } from "./slide12.jsx";
 import { PresenterSlide as P13, AudienceSlide as A13 } from "./slide13.jsx";
 import { PresenterSlide as P14, AudienceSlide as A14 } from "./slide14.jsx";
 import { PresenterSlide as P15, AudienceSlide as A15 } from "./slide15.jsx";
+import { PresenterSlide as P16, AudienceSlide as A16 } from "./slide16.jsx";
+import { PresenterSlide as P17, AudienceSlide as A17 } from "./slide17.jsx";
+import { PresenterSlide as P18, AudienceSlide as A18 } from "./slide18.jsx";
+import { PresenterSlide as P19, AudienceSlide as A19 } from "./slide19.jsx";
 
 // Each entry = one slide
 // presenterView = what the presenter sees on their screen
@@ -37,6 +41,10 @@ const slides = [
   { id: 13, photo: getSlidePhoto(13), presenterView: P13, audienceView: A13 },
   { id: 14, photo: getSlidePhoto(14), presenterView: P14, audienceView: A14 },
   { id: 15, photo: getSlidePhoto(15), presenterView: P15, audienceView: A15 },
+  { id: 16, photo: getSlidePhoto(16), presenterView: P16, audienceView: A16 },
+  { id: 17, photo: getSlidePhoto(17), presenterView: P17, audienceView: A17 },
+  { id: 18, photo: getSlidePhoto(18), presenterView: P18, audienceView: A18 },
+  { id: 19, photo: getSlidePhoto(19), presenterView: P19, audienceView: A19 },
 ];
 
 export default slides;
