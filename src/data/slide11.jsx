@@ -1,19 +1,18 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
+import xjpFlower from "../assets/photos/XJPflower.png";
 
 const smartLivingPoints = [
   "Supply of publicly accessible green space",
-  "Movie screenings",
-  "A place for community concerts and shows",
-  "Inclusive access: Braille support and different languages",
+  "A place for movie screenings, community concerts, and shows",
+  "Accessibility: Braille support and different languages",
 ];
 
 const smartEconomyPoints = [
   "Attracts tourists and talent",
   "Differential pricing for tourists",
-  "Orchid diplomacy",
-  "Named orchids: Obama, Xi Jinping, Pope Francis",
+  "Orchid diplomacy, including named orchids for Obama, Xi Jinping, and Pope Francis",
 ];
 
 export const PresenterSlide = ({ photo }) => (
@@ -37,35 +36,54 @@ export const AudienceSlide = ({ photo }) => (
 
 function SecondaryContributionGrid() {
   return (
-    <div style={styles.grid}>
-      <article style={styles.card}>
-        <h2 style={styles.subTitle}>Smart Living</h2>
-        <ul style={styles.list}>
-          {smartLivingPoints.map((point) => (
-            <li key={point} style={styles.item}>{point}</li>
-          ))}
-        </ul>
-      </article>
+    <div style={styles.layout}>
+      <div style={styles.grid}>
+        <article style={styles.card}>
+          <h2 style={styles.subTitle}>Smart Living</h2>
+          <ul style={styles.list}>
+            {smartLivingPoints.map((point) => (
+              <li key={point} style={styles.item}>{point}</li>
+            ))}
+          </ul>
+        </article>
 
-      <article style={styles.card}>
-        <h2 style={styles.subTitle}>Smart Economy</h2>
-        <ul style={styles.list}>
-          {smartEconomyPoints.map((point) => (
-            <li key={point} style={styles.item}>{point}</li>
-          ))}
-        </ul>
-      </article>
+        <article style={styles.card}>
+          <h2 style={styles.subTitle}>Smart Economy</h2>
+          <ul style={styles.list}>
+            {smartEconomyPoints.map((point) => (
+              <li key={point} style={styles.item}>{point}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+
+      <aside style={styles.imagePanel}>
+        <p style={styles.imageEyebrow}>Orchid Diplomacy</p>
+        <img
+          src={xjpFlower}
+          alt="XJP orchid flower"
+          style={styles.image}
+          loading="lazy"
+          decoding="async"
+        />
+      </aside>
     </div>
   );
 }
 
 const styles = {
-  grid: {
+  layout: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
+    gridTemplateColumns: "minmax(0, 1fr) minmax(220px, 360px)",
     gap: spacing.sm,
     width: "100%",
-    maxWidth: "1120px",
+    maxWidth: "1240px",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
+    gap: spacing.sm,
+    width: "100%",
   },
   card: {
     ...slideUi.card,
@@ -90,5 +108,29 @@ const styles = {
     color: colors.textSecondary,
     fontSize: "clamp(0.88rem, 1.4vw, 1rem)",
     lineHeight: 1.36,
+  },
+  imagePanel: {
+    ...slideUi.card,
+    boxSizing: "border-box",
+    display: "grid",
+    gap: "0.6rem",
+    alignContent: "start",
+    padding: "clamp(0.75rem, 1.8vw, 1.1rem)",
+  },
+  imageEyebrow: {
+    margin: 0,
+    color: colors.accent,
+    fontSize: "0.75rem",
+    fontWeight: fonts.weightBold,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+  },
+  image: {
+    width: "100%",
+    height: "clamp(240px, 36vh, 420px)",
+    objectFit: "cover",
+    borderRadius: "8px",
+    border: `1px solid ${colors.border}`,
+    boxSizing: "border-box",
   },
 };
