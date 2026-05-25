@@ -14,7 +14,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Frame these as enabling pillars: strong governance keeps the landscape coherent while Smart People scales impact through education."
   >
     <p style={slideText.eyebrow}>Minor Contribution</p>
     <h1 style={slideText.heading}>Smart Governance and Smart People</h1>

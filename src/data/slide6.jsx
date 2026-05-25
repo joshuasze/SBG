@@ -18,7 +18,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Emphasize Smart Environment as the core pillar, then use the biodiversity examples as evidence."
   >
     <p style={slideText.eyebrow}>Singapore as a Smart City</p>
     <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>

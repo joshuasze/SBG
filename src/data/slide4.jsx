@@ -6,7 +6,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Invite final reflections and questions from the audience."
   >
     <p style={slideText.eyebrow}>Thank You</p>
     <h1 style={slideText.title}>Questions Among the Trees?</h1>

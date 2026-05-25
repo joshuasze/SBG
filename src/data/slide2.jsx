@@ -6,7 +6,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note='Click "Open Poll" in the presenter bar to send the question to audience devices.'
   >
     <p style={slideText.eyebrow}>Audience Check-In</p>
     <h1 style={slideText.heading}>Quick Poll</h1>

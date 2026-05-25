@@ -20,7 +20,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Use this to show the spillover value: social wellbeing through Smart Living and national positioning through Smart Economy."
   >
     <p style={slideText.eyebrow}>Secondary Contributions</p>
     <h1 style={slideText.heading}>Smart Living and Smart Economy</h1>

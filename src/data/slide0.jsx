@@ -6,7 +6,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Open with the garden as a living UNESCO heritage landscape, then invite the audience into the story."
   >
     <p style={slideText.eyebrow}>Singapore Botanic Gardens</p>
     <h1 style={slideText.title}>A Living Heritage Garden</h1>

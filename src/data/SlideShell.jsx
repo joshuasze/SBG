@@ -1,6 +1,6 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
 
-export default function SlideShell({ photo, align = "center", children, note }) {
+export default function SlideShell({ photo, align = "center", children }) {
   return (
     <div style={styles.page}>
       {photo ? (
@@ -24,7 +24,6 @@ export default function SlideShell({ photo, align = "center", children, note }) 
         }}
       >
         {children}
-        {note && <p style={styles.note}>Presenter notes: {note}</p>}
       </div>
     </div>
   );
@@ -76,15 +75,5 @@ const styles = {
     position: "relative",
     width: "100%",
     zIndex: 1,
-  },
-  note: {
-    borderLeft: `3px solid ${colors.accent}`,
-    color: colors.textMuted,
-    fontSize: fonts.sizeSmall,
-    fontStyle: "italic",
-    lineHeight: 1.5,
-    margin: `${spacing.lg} 0 0 0`,
-    maxWidth: "620px",
-    paddingLeft: spacing.sm,
   },
 };

@@ -12,7 +12,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Use this as the roadmap before moving into the interactive poll."
   >
     <p style={slideText.eyebrow}>Today&apos;s Route</p>
     <h1 style={slideText.heading}>What We Will Explore</h1>

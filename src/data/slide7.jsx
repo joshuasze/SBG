@@ -20,7 +20,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Position this as the continuation of Smart Environment through innovation, research, and digital leadership."
   >
     <p style={slideText.eyebrow}>Singapore as a Smart City</p>
     <h1 style={slideText.heading}>Smart Environment: Innovation and Delivery</h1>

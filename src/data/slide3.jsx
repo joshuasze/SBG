@@ -7,7 +7,7 @@ const pillars = [
 ];
 
 export const PresenterSlide = () => (
-  <SlideFrame note="Use this slide to frame the Gardens as both a managed biodiversity site and an everyday civic landscape.">
+  <SlideFrame>
     <SlideContent />
   </SlideFrame>
 );
@@ -18,12 +18,11 @@ export const AudienceSlide = () => (
   </SlideFrame>
 );
 
-function SlideFrame({ children, note }) {
+function SlideFrame({ children }) {
   return (
     <div style={styles.page}>
       <div style={styles.stage}>
         {children}
-        {note && <p style={styles.note}>Presenter notes: {note}</p>}
       </div>
     </div>
   );
@@ -195,16 +194,5 @@ const styles = {
     lineHeight: 1.42,
     margin: 0,
     padding: "0.9rem 1rem",
-  },
-  note: {
-    borderLeft: `3px solid ${colors.accent}`,
-    boxSizing: "border-box",
-    color: colors.textMuted,
-    fontSize: fonts.sizeSmall,
-    fontStyle: "italic",
-    lineHeight: 1.5,
-    margin: `${spacing.sm} auto 0 0`,
-    maxWidth: "720px",
-    paddingLeft: spacing.sm,
   },
 };

@@ -31,7 +31,6 @@ export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo}
     align="left"
-    note="Anchor on Smart Environmental as the Gardens' core contribution, then orbit out through the other four pillars."
   >
     <p style={slideText.eyebrow}>Singapore as a Smart City</p>
     <h1 style={styles.heading}>The Gardens&apos; Five Pillars</h1>
