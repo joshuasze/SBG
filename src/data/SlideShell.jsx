@@ -1,4 +1,4 @@
-import { colors, fonts, spacing } from "../styles/tokens.js";
+import { colors, fonts } from "../styles/tokens.js";
 
 export default function SlideShell({ photo, align = "center", children }) {
   return (
