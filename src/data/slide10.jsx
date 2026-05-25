@@ -4,11 +4,19 @@ import { slideText, slideUi } from "./slideTheme.js";
 const featuredSites = [
   {
     title: "Primary Rainforest",
-    body: "A rare 6-hectare fragment of Singapore's original tropical rainforest, older than the Gardens itself, with 314 plant species and many rare native species.",
+    points: [
+      "Rare 6-hectare fragment of Singapore's original tropical rainforest",
+      "Older than the Gardens itself",
+      "Home to 314 plant species and many rare native species",
+    ],
   },
   {
     title: "National Orchid Garden",
-    body: "The world's largest tropical orchid display, with over 1,000 species and 2,000 hybrids, supporting orchid breeding, research, and endangered species conservation.",
+    points: [
+      "World's largest tropical orchid display",
+      "Over 1,000 species and 2,000 hybrids",
+      "Supports orchid breeding, research, and endangered species conservation",
+    ],
   },
 ];
 
@@ -48,7 +56,13 @@ function SlideContent() {
         {featuredSites.map((site) => (
           <article key={site.title} style={styles.card}>
             <h2 style={styles.cardTitle}>{site.title}</h2>
-            <p style={styles.cardBody}>{site.body}</p>
+            <ul style={styles.list}>
+              {site.points.map((point) => (
+                <li key={point} style={styles.item}>
+                  {point}
+                </li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
@@ -135,11 +149,17 @@ const styles = {
     margin: "0 0 0.75rem 0",
     overflowWrap: "break-word",
   },
-  cardBody: {
-    color: colors.textSecondary,
-    fontSize: "clamp(0.9rem, 1.25vw, 1.05rem)",
-    lineHeight: 1.38,
+  list: {
+    display: "grid",
+    gap: "0.45rem",
     margin: 0,
+    paddingLeft: "1.1rem",
+  },
+  item: {
+    color: colors.textSecondary,
+    fontSize: "clamp(0.86rem, 1.15vw, 0.98rem)",
+    lineHeight: 1.3,
+    paddingLeft: "0.05rem",
   },
   bottomGrid: {
     display: "grid",

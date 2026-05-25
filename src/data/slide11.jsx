@@ -4,11 +4,19 @@ import { slideUi } from "./slideTheme.js";
 const experienceSites = [
   {
     title: "Evolution Garden",
-    body: "A 1.5-hectare outdoor trail that presents the history of plant life on Earth, from primitive plants to modern flowering species.",
+    points: [
+      "1.5-hectare outdoor trail",
+      "Presents the history of plant life on Earth",
+      "Moves from primitive plants to modern flowering species",
+    ],
   },
   {
     title: "Healing Garden",
-    body: "A 2.5-hectare garden with over 400 medicinal plant species, showing the connection between plants, traditional medicine, and human wellbeing.",
+    points: [
+      "2.5-hectare garden with over 400 medicinal plant species",
+      "Shows the connection between plants and traditional medicine",
+      "Links plant knowledge with human wellbeing",
+    ],
   },
 ];
 
@@ -48,7 +56,13 @@ function SlideContent() {
         {experienceSites.map((site) => (
           <article key={site.title} style={styles.card}>
             <h2 style={styles.cardTitle}>{site.title}</h2>
-            <p style={styles.cardBody}>{site.body}</p>
+            <ul style={styles.list}>
+              {site.points.map((point) => (
+                <li key={point} style={styles.item}>
+                  {point}
+                </li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
@@ -138,11 +152,17 @@ const styles = {
     margin: "0 0 0.75rem 0",
     overflowWrap: "break-word",
   },
-  cardBody: {
-    color: colors.textSecondary,
-    fontSize: "clamp(0.9rem, 1.25vw, 1.05rem)",
-    lineHeight: 1.38,
+  list: {
+    display: "grid",
+    gap: "0.45rem",
     margin: 0,
+    paddingLeft: "1.1rem",
+  },
+  item: {
+    color: colors.textSecondary,
+    fontSize: "clamp(0.86rem, 1.15vw, 0.98rem)",
+    lineHeight: 1.3,
+    paddingLeft: "0.05rem",
   },
   bottomGrid: {
     display: "grid",
