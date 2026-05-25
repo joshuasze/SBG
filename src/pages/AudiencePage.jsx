@@ -16,10 +16,12 @@ export default function AudiencePage({ socket, presentationState }) {
         <SlideComponent photo={current.photo} />
       </div>
 
-      {/* Poll appears at the bottom when active */}
+      {/* Poll appears as a centered popup when active */}
       {canShowPoll && pollOpen && (
-        <div style={styles.pollArea}>
-          <PollCard socket={socket} />
+        <div style={styles.pollOverlay}>
+          <div style={styles.pollDialog}>
+            <PollCard socket={socket} />
+          </div>
         </div>
       )}
     </div>
@@ -45,14 +47,24 @@ const styles = {
     overflowY: "auto",
     WebkitOverflowScrolling: "touch",
   },
-  // Poll sits at the bottom but doesn't trap content above it: it simply caps
-  // its own height and scrolls internally if the question + buttons get tall.
-  pollArea: {
-    padding: spacing.sm,
-    paddingBottom: `calc(${spacing.sm} + env(safe-area-inset-bottom, 0px))`,
-    background: "rgba(11, 23, 18, 0.96)",
-    borderTop: `1px solid ${colors.border}`,
-    maxHeight: "45vh",
+  pollOverlay: {
+    position: "fixed",
+    inset: 0,
+    zIndex: 40,
+    display: "grid",
+    placeItems: "center",
+    padding: "clamp(0.75rem, 2.5vw, 1.25rem)",
+    paddingTop: `calc(clamp(0.75rem, 2.5vw, 1.25rem) + env(safe-area-inset-top, 0px))`,
+    paddingRight: `calc(clamp(0.75rem, 2.5vw, 1.25rem) + env(safe-area-inset-right, 0px))`,
+    paddingBottom: `calc(clamp(0.75rem, 2.5vw, 1.25rem) + env(safe-area-inset-bottom, 0px))`,
+    paddingLeft: `calc(clamp(0.75rem, 2.5vw, 1.25rem) + env(safe-area-inset-left, 0px))`,
+    background: "rgba(4, 10, 7, 0.62)",
+    backdropFilter: "blur(4px)",
+    boxSizing: "border-box",
+  },
+  pollDialog: {
+    width: "min(760px, 100%)",
+    maxHeight: "min(84svh, 680px)",
     overflowY: "auto",
     boxSizing: "border-box",
   },
