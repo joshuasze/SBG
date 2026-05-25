@@ -1,5 +1,10 @@
 import { colors, fonts } from "../styles/tokens.js";
-import { slideUi } from "./slideTheme.js";
+import { slideText, slideUi } from "./slideTheme.js";
+import museumPath from "../assets/photos/on audience f3/IMG_9245.jpg";
+import heritagePath from "../assets/photos/on audience f3/IMG_9278.jpg";
+import orchidCulturePath from "../assets/photos/on audience f3/IMG_9287.jpg";
+import identityPath from "../assets/photos/on audience f3/IMG_9273.jpg";
+import landmarkPath from "../assets/photos/on audience f3/IMG_9313.jpg";
 
 const heritageSites = [
   {
@@ -20,6 +25,14 @@ const heritageSites = [
   },
 ];
 
+const audiencePhotos = [
+  { src: museumPath, alt: "Heritage space at Singapore Botanic Gardens", variant: "large" },
+  { src: heritagePath, alt: "Historic garden display and visitor path", variant: "tall" },
+  { src: orchidCulturePath, alt: "Cultural orchid display in the Gardens", variant: "large" },
+  { src: identityPath, alt: "Singapore Botanic Gardens heritage landscape", variant: "tall" },
+  { src: landmarkPath, alt: "Urban identity landmark inside the Gardens", variant: "tall" },
+];
+
 export const PresenterSlide = () => (
   <SlideFrame>
     <SlideContent />
@@ -28,7 +41,7 @@ export const PresenterSlide = () => (
 
 export const AudienceSlide = () => (
   <SlideFrame>
-    <SlideContent />
+    <AudiencePhotoCollage />
   </SlideFrame>
 );
 
@@ -79,6 +92,31 @@ function SlideContent() {
   );
 }
 
+function AudiencePhotoCollage() {
+  return (
+    <section style={styles.audienceLayout} aria-label="Feature 3 photo collage">
+      <div style={styles.audienceHeader}>
+        <p style={styles.audienceKicker}>Feature 3</p>
+        <h1 style={styles.audienceTitle}>
+          Heritage, Culture & Urban Identity
+        </h1>
+      </div>
+      <div className="audience-photo-collage">
+        {audiencePhotos.map((photo) => (
+          <figure
+            className={`audience-photo-collage__item ${
+              photo.variant ? `is-${photo.variant}` : ""
+            }`}
+            key={photo.src}
+          >
+            <img src={photo.src} alt={photo.alt} loading="eager" />
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const styles = {
   page: {
     background:
@@ -112,6 +150,31 @@ const styles = {
     display: "grid",
     gap: "clamp(0.65rem, 1.35vw, 1rem)",
     width: "100%",
+  },
+  audienceLayout: {
+    display: "grid",
+    gap: "clamp(0.85rem, 1.5vw, 1.25rem)",
+    width: "100%",
+  },
+  audienceHeader: {
+    alignItems: "end",
+    display: "grid",
+    gap: "0.35rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 19rem), 1fr))",
+  },
+  audienceKicker: {
+    color: colors.accent,
+    fontSize: "clamp(0.82rem, 1.45vw, 0.98rem)",
+    fontWeight: fonts.weightBold,
+    margin: 0,
+    textTransform: "uppercase",
+  },
+  audienceTitle: {
+    ...slideText.heading,
+    fontSize: "clamp(1.9rem, 4.2vw, 3.9rem)",
+    lineHeight: 0.96,
+    margin: 0,
+    overflowWrap: "break-word",
   },
   title: {
     color: colors.textPrimary,
