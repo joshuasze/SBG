@@ -1,5 +1,13 @@
 import { colors, fonts } from "../styles/tokens.js";
-import { slideUi } from "./slideTheme.js";
+import { slideText, slideUi } from "./slideTheme.js";
+import healingPath from "../assets/photos/on audience f2/IMG_7526.jpg";
+import wellnessPath from "../assets/photos/on audience f2/IMG_7532.jpg";
+import gardenPath from "../assets/photos/on audience f2/IMG_7523.jpg";
+import trailPath from "../assets/photos/on audience f2/IMG_9080.jpg";
+import sensoryPath from "../assets/photos/on audience f2/IMG_7512.jpg";
+import signPath from "../assets/photos/on audience f2/slide6_I .jpg";
+import learningPath from "../assets/photos/on audience f2/IMG_7529.jpg";
+import experiencePath from "../assets/photos/on audience f2/IMG_4255.jpg";
 
 const experienceSites = [
   {
@@ -20,6 +28,17 @@ const experienceSites = [
   },
 ];
 
+const audiencePhotos = [
+  { src: signPath, alt: "Education and wellness feature sign at the Gardens", variant: "wide" },
+  { src: healingPath, alt: "Healing Garden plant collection", variant: "tall" },
+  { src: gardenPath, alt: "Outdoor garden experience area", variant: "large" },
+  { src: wellnessPath, alt: "Medicinal plants along a visitor path", variant: "tall" },
+  { src: trailPath, alt: "Walkable nature trail in Singapore Botanic Gardens", variant: "wide" },
+  { src: sensoryPath, alt: "Dense planting for sensory garden experience", variant: "tall" },
+  { src: learningPath, alt: "Plant education display in the Gardens", variant: "large" },
+  { src: experiencePath, alt: "Human-centered garden experience", variant: "tall" },
+];
+
 export const PresenterSlide = () => (
   <SlideFrame>
     <SlideContent />
@@ -28,7 +47,7 @@ export const PresenterSlide = () => (
 
 export const AudienceSlide = () => (
   <SlideFrame>
-    <SlideContent />
+    <AudiencePhotoCollage />
   </SlideFrame>
 );
 
@@ -82,6 +101,31 @@ function SlideContent() {
   );
 }
 
+function AudiencePhotoCollage() {
+  return (
+    <section style={styles.audienceLayout} aria-label="Feature 2 photo collage">
+      <div style={styles.audienceHeader}>
+        <p style={styles.audienceKicker}>Feature 2</p>
+        <h1 style={styles.audienceTitle}>
+          Education, Wellness & Human Experience
+        </h1>
+      </div>
+      <div className="audience-photo-collage">
+        {audiencePhotos.map((photo) => (
+          <figure
+            className={`audience-photo-collage__item ${
+              photo.variant ? `is-${photo.variant}` : ""
+            }`}
+            key={photo.src}
+          >
+            <img src={photo.src} alt={photo.alt} loading="eager" />
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const styles = {
   page: {
     background:
@@ -115,6 +159,31 @@ const styles = {
     display: "grid",
     gap: "clamp(0.75rem, 1.6vw, 1.15rem)",
     width: "100%",
+  },
+  audienceLayout: {
+    display: "grid",
+    gap: "clamp(0.85rem, 1.5vw, 1.25rem)",
+    width: "100%",
+  },
+  audienceHeader: {
+    alignItems: "end",
+    display: "grid",
+    gap: "0.35rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 19rem), 1fr))",
+  },
+  audienceKicker: {
+    color: colors.accent,
+    fontSize: "clamp(0.82rem, 1.45vw, 0.98rem)",
+    fontWeight: fonts.weightBold,
+    margin: 0,
+    textTransform: "uppercase",
+  },
+  audienceTitle: {
+    ...slideText.heading,
+    fontSize: "clamp(1.9rem, 4.2vw, 3.9rem)",
+    lineHeight: 0.96,
+    margin: 0,
+    overflowWrap: "break-word",
   },
   title: {
     color: colors.textPrimary,
