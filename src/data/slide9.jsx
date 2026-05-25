@@ -2,16 +2,18 @@ import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
 
-const embodimentPoints = [
-  "82 hectares of greenery",
-  "167 years of legacy (since 1859)",
+const innovationPoints = [
+  "Rubber tree innovation",
+  "Orchid breeding",
 ];
 
-const biodiversityPoints = [
-  "More than 10,000 species of flora",
-  "Home to many animals",
-  "Seed Bank",
-  "Examples: the Dell and the primary rainforest",
+const researchPoints = [
+  "Produced many research papers",
+];
+
+const digitalPoints = [
+  "Leading the digitalization effort",
+  "Digital twin",
 ];
 
 export const PresenterSlide = ({ photo }) => (
@@ -20,35 +22,44 @@ export const PresenterSlide = ({ photo }) => (
     align="left"
   >
     <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
-    <SmartEnvironmentContent />
+    <h1 style={slideText.heading}>Smart Environment: Innovation and Delivery</h1>
+    <SmartEnvironmentContinuation />
   </SlideShell>
 );
 
 export const AudienceSlide = ({ photo }) => (
   <SlideShell photo={photo} align="left">
     <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
-    <SmartEnvironmentContent />
+    <h1 style={slideText.heading}>Smart Environment: Innovation and Delivery</h1>
+    <SmartEnvironmentContinuation />
   </SlideShell>
 );
 
-function SmartEnvironmentContent() {
+function SmartEnvironmentContinuation() {
   return (
     <div style={styles.grid}>
       <article style={styles.card}>
-        <h2 style={styles.cardTitle}>Physical Embodiment: City in Nature</h2>
+        <h2 style={styles.cardTitle}>Nursery and Innovation</h2>
         <ul style={styles.list}>
-          {embodimentPoints.map((point) => (
+          {innovationPoints.map((point) => (
             <li key={point} style={styles.item}>{point}</li>
           ))}
         </ul>
       </article>
 
       <article style={styles.card}>
-        <h2 style={styles.cardTitle}>Biodiversity and Preservation</h2>
+        <h2 style={styles.cardTitle}>Research Center</h2>
         <ul style={styles.list}>
-          {biodiversityPoints.map((point) => (
+          {researchPoints.map((point) => (
+            <li key={point} style={styles.item}>{point}</li>
+          ))}
+        </ul>
+      </article>
+
+      <article style={styles.card}>
+        <h2 style={styles.cardTitle}>Digitalization Spearhead</h2>
+        <ul style={styles.list}>
+          {digitalPoints.map((point) => (
             <li key={point} style={styles.item}>{point}</li>
           ))}
         </ul>
@@ -60,32 +71,33 @@ function SmartEnvironmentContent() {
 const styles = {
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",
     gap: spacing.sm,
     width: "100%",
-    maxWidth: "1060px",
+    maxWidth: "1120px",
   },
   card: {
     ...slideUi.card,
     boxSizing: "border-box",
-    padding: "clamp(0.9rem, 2vw, 1.4rem)",
+    padding: "clamp(0.85rem, 1.8vw, 1.25rem)",
+    minHeight: "clamp(160px, 22vh, 210px)",
   },
   cardTitle: {
     color: colors.textPrimary,
     fontFamily: fonts.display,
-    fontSize: "clamp(1.2rem, 2.4vw, 1.8rem)",
-    lineHeight: 1.05,
+    fontSize: "clamp(1.15rem, 2.1vw, 1.6rem)",
+    lineHeight: 1.08,
     margin: `0 0 ${spacing.xs} 0`,
   },
   list: {
     margin: 0,
     paddingLeft: "1.1rem",
     display: "grid",
-    gap: "0.3rem",
+    gap: "0.25rem",
   },
   item: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.88rem, 1.45vw, 1rem)",
-    lineHeight: 1.38,
+    fontSize: "clamp(0.85rem, 1.3vw, 0.97rem)",
+    lineHeight: 1.34,
   },
 };
