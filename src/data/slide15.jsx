@@ -154,7 +154,7 @@ const styles = {
   th: {
     color: colors.textPrimary,
     textAlign: "left",
-    fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)",
+    fontSize: "clamp(1.05rem, 1.38vw, 1.15rem)",
     fontWeight: fonts.weightBold,
     padding: "0.4rem 0.45rem",
     border: `1px solid ${colors.border}`,
@@ -164,7 +164,7 @@ const styles = {
   rowHead: {
     color: colors.textPrimary,
     textAlign: "left",
-    fontSize: "clamp(0.93rem, 1.15vw, 1.03rem)",
+    fontSize: "clamp(1.03rem, 1.33vw, 1.13rem)",
     fontWeight: fonts.weightBold,
     padding: "0.4rem 0.45rem",
     border: `1px solid ${colors.border}`,
@@ -173,7 +173,7 @@ const styles = {
   },
   td: {
     color: colors.textSecondary,
-    fontSize: "clamp(0.92rem, 1.1vw, 1rem)",
+    fontSize: "clamp(1.02rem, 1.3vw, 1.12rem)",
     lineHeight: 1.24,
     padding: "0.38rem 0.45rem",
     border: `1px solid ${colors.border}`,
