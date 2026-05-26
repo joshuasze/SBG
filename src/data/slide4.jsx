@@ -1,5 +1,6 @@
 import { colors, fonts } from "../styles/tokens.js";
 import { slideText, slideUi } from "./slideTheme.js";
+import heritageFeaturePath from "../assets/photos/Slide 4 pic/IMG_7557.jpg";
 import rainforestPath from "../assets/photos/on audience f1/slide5_g .jpg";
 import palmPath from "../assets/photos/on audience f1/slide5_biooo.jpg";
 import orchidPath from "../assets/photos/on audience f1/IMG_7567.jpg";
@@ -130,7 +131,9 @@ function AudiencePhotoCollage() {
 const styles = {
   page: {
     background:
-      "linear-gradient(135deg, #07110d 0%, #102219 48%, #18251b 100%)",
+      `linear-gradient(90deg, rgba(4, 10, 7, 0.86) 0%, rgba(4, 10, 7, 0.7) 54%, rgba(4, 10, 7, 0.42) 100%), linear-gradient(180deg, rgba(4, 10, 7, 0.4) 0%, rgba(4, 10, 7, 0.68) 100%), url(${heritageFeaturePath})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
     color: colors.textPrimary,
     fontFamily: fonts.family,
     minHeight: "100%",
@@ -140,7 +143,7 @@ const styles = {
   },
   canopy: {
     background:
-      "radial-gradient(circle at 76% 16%, rgba(215, 168, 79, 0.18), transparent 24%), radial-gradient(circle at 16% 88%, rgba(79, 122, 89, 0.32), transparent 30%)",
+      "radial-gradient(circle at 76% 16%, rgba(215, 168, 79, 0.12), transparent 24%), radial-gradient(circle at 16% 88%, rgba(79, 122, 89, 0.2), transparent 30%)",
     inset: 0,
     position: "absolute",
   },
@@ -193,6 +196,7 @@ const styles = {
     margin: 0,
     maxWidth: "1280px",
     overflowWrap: "break-word",
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
   },
   lede: {
     color: colors.textSecondary,
@@ -200,6 +204,7 @@ const styles = {
     lineHeight: 1.38,
     margin: 0,
     maxWidth: "860px",
+    textShadow: "0 2px 12px rgba(0, 0, 0, 0.78)",
   },
   cardGrid: {
     display: "grid",
@@ -208,6 +213,8 @@ const styles = {
   },
   card: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     minHeight: "clamp(210px, 25vh, 270px)",
     padding: "clamp(0.9rem, 1.8vw, 1.45rem)",
@@ -238,7 +245,8 @@ const styles = {
     gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 24rem), 1fr))",
   },
   sideNote: {
-    background: "rgba(245, 240, 230, 0.07)",
+    background: "rgba(4, 10, 7, 0.6)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderRadius: "8px",
     boxSizing: "border-box",
@@ -249,7 +257,8 @@ const styles = {
     padding: "0.75rem 0.85rem",
   },
   takeaway: {
-    background: "rgba(79, 122, 89, 0.25)",
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderLeft: `4px solid ${colors.accent}`,
     borderRadius: "8px",
