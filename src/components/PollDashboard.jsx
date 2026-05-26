@@ -34,6 +34,17 @@ export default function PollDashboard({ votes = {}, poll }) {
           );
         })}
       </div>
+
+      {poll.image && (
+        <img
+          src={poll.image}
+          alt={poll.imageAlt ?? "Image for the poll question"}
+          style={styles.pollImage}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
+      )}
     </aside>
   );
 }
@@ -85,6 +96,16 @@ const styles = {
   results: {
     display: "grid",
     gap: spacing.sm,
+  },
+  pollImage: {
+    display: "block",
+    width: "100%",
+    maxHeight: "min(28vh, 260px)",
+    objectFit: "cover",
+    borderRadius: radii.md,
+    border: `1px solid ${colors.border}`,
+    boxSizing: "border-box",
+    marginTop: spacing.md,
   },
   resultRow: {
     display: "grid",
