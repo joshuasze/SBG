@@ -1,5 +1,6 @@
 import { colors, fonts } from "../styles/tokens.js";
 import { slideText, slideUi } from "./slideTheme.js";
+import heritageFeaturePath from "../assets/photos/Slide 7 pic/9C7F78A1-6E0A-4FB9-B65F-6DA8DE01FD4E.jpg";
 import museumPath from "../assets/photos/on audience f3/IMG_9245.jpg";
 import heritagePath from "../assets/photos/on audience f3/IMG_9278.jpg";
 import orchidCulturePath from "../assets/photos/on audience f3/IMG_9287.jpg";
@@ -120,7 +121,9 @@ function AudiencePhotoCollage() {
 const styles = {
   page: {
     background:
-      "linear-gradient(135deg, #07110d 0%, #122118 46%, #24271b 100%)",
+      `linear-gradient(90deg, rgba(4, 10, 7, 0.86) 0%, rgba(4, 10, 7, 0.7) 54%, rgba(4, 10, 7, 0.42) 100%), linear-gradient(180deg, rgba(4, 10, 7, 0.4) 0%, rgba(4, 10, 7, 0.68) 100%), url(${heritageFeaturePath})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
     color: colors.textPrimary,
     fontFamily: fonts.family,
     minHeight: "100%",
@@ -130,7 +133,7 @@ const styles = {
   },
   canopy: {
     background:
-      "radial-gradient(circle at 78% 18%, rgba(215, 168, 79, 0.18), transparent 24%), radial-gradient(circle at 14% 88%, rgba(79, 122, 89, 0.3), transparent 30%)",
+      "radial-gradient(circle at 78% 18%, rgba(215, 168, 79, 0.12), transparent 24%), radial-gradient(circle at 14% 88%, rgba(79, 122, 89, 0.2), transparent 30%)",
     inset: 0,
     position: "absolute",
   },
@@ -185,6 +188,7 @@ const styles = {
     margin: 0,
     maxWidth: "1320px",
     overflowWrap: "break-word",
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
   },
   lede: {
     color: colors.textSecondary,
@@ -192,6 +196,7 @@ const styles = {
     lineHeight: 1.34,
     margin: 0,
     maxWidth: "920px",
+    textShadow: "0 2px 12px rgba(0, 0, 0, 0.78)",
   },
   cardGrid: {
     display: "grid",
@@ -200,6 +205,8 @@ const styles = {
   },
   card: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     minHeight: "clamp(230px, 29vh, 310px)",
     padding: "clamp(0.85rem, 1.55vw, 1.25rem)",
@@ -230,7 +237,8 @@ const styles = {
     gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 24rem), 1fr))",
   },
   sideNote: {
-    background: "rgba(245, 240, 230, 0.07)",
+    background: "rgba(4, 10, 7, 0.6)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderRadius: "8px",
     boxSizing: "border-box",
@@ -241,7 +249,8 @@ const styles = {
     padding: "0.7rem 0.8rem",
   },
   takeaway: {
-    background: "rgba(79, 122, 89, 0.25)",
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderLeft: `4px solid ${colors.accent}`,
     borderRadius: "8px",
