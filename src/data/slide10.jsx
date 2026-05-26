@@ -128,7 +128,9 @@ const styles = {
   image: {
     width: "100%",
     height: "clamp(240px, 36vh, 420px)",
-    objectFit: "cover",
+    objectFit: "contain",
+    objectPosition: "center",
+    background: "rgba(11, 23, 18, 0.6)",
     borderRadius: "8px",
     border: `1px solid ${colors.border}`,
     boxSizing: "border-box",
