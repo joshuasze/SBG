@@ -1,6 +1,7 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
+import smartEnvironmentPath from "../assets/photos/slide9/IMG_4407.jpg";
 
 const embodimentPoints = [
   "82 hectares of greenery",
@@ -16,19 +17,19 @@ const biodiversityPoints = [
 
 export const PresenterSlide = ({ photo }) => (
   <SlideShell
-    photo={photo}
+    photo={photo ?? smartEnvironmentPath}
     align="left"
   >
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
+    <p style={styles.eyebrow}>Singapore as a Smart City</p>
+    <h1 style={styles.heading}>Smart Environment: The Major Contribution</h1>
     <SmartEnvironmentContent />
   </SlideShell>
 );
 
 export const AudienceSlide = ({ photo }) => (
-  <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
+  <SlideShell photo={photo ?? smartEnvironmentPath} align="left">
+    <p style={styles.eyebrow}>Singapore as a Smart City</p>
+    <h1 style={styles.heading}>Smart Environment: The Major Contribution</h1>
     <SmartEnvironmentContent />
   </SlideShell>
 );
@@ -58,6 +59,14 @@ function SmartEnvironmentContent() {
 }
 
 const styles = {
+  eyebrow: {
+    ...slideText.eyebrow,
+    textShadow: "0 2px 12px rgba(0, 0, 0, 0.78)",
+  },
+  heading: {
+    ...slideText.heading,
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
+  },
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
@@ -67,6 +76,8 @@ const styles = {
   },
   card: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     padding: "clamp(0.9rem, 2vw, 1.4rem)",
   },
