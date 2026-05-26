@@ -18,11 +18,11 @@ export const PresenterSlide = ({ photo }) => (
       SBG has strong potential to scale globally with a clearer digital and knowledge strategy.
     </p>
     <article style={styles.card}>
-      <ul style={styles.list}>
+      <div style={styles.boxGrid}>
         {actions.map((item) => (
-          <li key={item} style={styles.item}>{item}</li>
+          <div key={item} style={styles.itemBox}>{item}</div>
         ))}
-      </ul>
+      </div>
     </article>
     <p style={styles.result}>
       Result: Higher global presence and stronger smart-city brand value.
@@ -39,11 +39,11 @@ export const AudienceSlide = ({ photo }) => (
       SBG has strong potential to scale globally with a clearer digital and knowledge strategy.
     </p>
     <article style={styles.card}>
-      <ul style={styles.list}>
+      <div style={styles.boxGrid}>
         {actions.map((item) => (
-          <li key={item} style={styles.item}>{item}</li>
+          <div key={item} style={styles.itemBox}>{item}</div>
         ))}
-      </ul>
+      </div>
     </article>
     <p style={styles.result}>
       Result: Higher global presence and stronger smart-city brand value.
@@ -78,13 +78,17 @@ const styles = {
     width: "100%",
     padding: "clamp(0.8rem, 1.6vw, 1.15rem)",
   },
-  list: {
+  boxGrid: {
     margin: 0,
-    paddingLeft: "1.2rem",
     display: "grid",
-    gap: "0.28rem",
+    gap: "clamp(0.45rem, 1vw, 0.7rem)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(240px, 100%), 1fr))",
   },
-  item: {
+  itemBox: {
+    background: colors.bgSubtle,
+    border: `1px solid ${colors.borderSubtle}`,
+    borderRadius: "6px",
+    padding: "clamp(0.55rem, 1.2vw, 0.85rem)",
     color: colors.textSecondary,
     fontSize: "clamp(1rem, 1.35vw, 1.12rem)",
     lineHeight: 1.28,
