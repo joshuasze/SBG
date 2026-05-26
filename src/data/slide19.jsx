@@ -25,26 +25,29 @@ export const PresenterSlide = ({ photo }) => (
     <div style={styles.grid}>
       <article style={styles.card}>
         <h2 style={styles.subTitle}>Observed Gaps</h2>
-        <ul style={styles.list}>
+        <div style={styles.boxList}>
           {issues.map((item) => (
-            <li key={item} style={styles.item}>{item}</li>
+            <div key={item} style={styles.itemBox}>{item}</div>
           ))}
-        </ul>
+        </div>
       </article>
 
       <article style={styles.card}>
         <h2 style={styles.subTitle}>Integrated App Solution</h2>
-        <ul style={styles.list}>
+        <div style={styles.boxList}>
           {solution.map((item) => (
-            <li key={item} style={styles.item}>{item}</li>
+            <div key={item} style={styles.itemBox}>{item}</div>
           ))}
-        </ul>
+        </div>
       </article>
     </div>
 
-    <p style={styles.result}>
-      Result: A smoother, smarter visitor journey with better learning and engagement.
-    </p>
+    <article style={styles.resultCard}>
+      <p style={styles.resultLabel}>Result</p>
+      <p style={styles.resultText}>
+        A smoother, smarter visitor journey with better learning and engagement.
+      </p>
+    </article>
   </SlideShell>
 );
 
@@ -57,26 +60,29 @@ export const AudienceSlide = ({ photo }) => (
     <div style={styles.grid}>
       <article style={styles.card}>
         <h2 style={styles.subTitle}>Observed Gaps</h2>
-        <ul style={styles.list}>
+        <div style={styles.boxList}>
           {issues.map((item) => (
-            <li key={item} style={styles.item}>{item}</li>
+            <div key={item} style={styles.itemBox}>{item}</div>
           ))}
-        </ul>
+        </div>
       </article>
 
       <article style={styles.card}>
         <h2 style={styles.subTitle}>Integrated App Solution</h2>
-        <ul style={styles.list}>
+        <div style={styles.boxList}>
           {solution.map((item) => (
-            <li key={item} style={styles.item}>{item}</li>
+            <div key={item} style={styles.itemBox}>{item}</div>
           ))}
-        </ul>
+        </div>
       </article>
     </div>
 
-    <p style={styles.result}>
-      Result: A smoother, smarter visitor journey with better learning and engagement.
-    </p>
+    <article style={styles.resultCard}>
+      <p style={styles.resultLabel}>Result</p>
+      <p style={styles.resultText}>
+        A smoother, smarter visitor journey with better learning and engagement.
+      </p>
+    </article>
   </SlideShell>
 );
 
@@ -113,23 +119,43 @@ const styles = {
     fontSize: "clamp(1.2rem, 2.1vw, 1.65rem)",
     lineHeight: 1.08,
   },
-  list: {
+  boxList: {
     margin: 0,
-    paddingLeft: "1.2rem",
     display: "grid",
-    gap: "0.26rem",
+    gap: "clamp(0.42rem, 0.9vw, 0.62rem)",
   },
-  item: {
+  itemBox: {
+    background: colors.bgSubtle,
+    border: `1px solid ${colors.borderSubtle}`,
+    borderRadius: "6px",
+    padding: "clamp(0.5rem, 1vw, 0.78rem)",
     color: colors.textSecondary,
     fontSize: "clamp(1rem, 1.35vw, 1.12rem)",
     lineHeight: 1.28,
   },
-  result: {
+  resultCard: {
+    ...slideUi.card,
+    boxSizing: "border-box",
     margin: `${spacing.sm} 0 0 0`,
+    maxWidth: "1120px",
+    width: "100%",
+    padding: "clamp(0.7rem, 1.4vw, 1rem)",
+    border: `1px solid ${colors.accent}`,
+    background: "rgba(215, 168, 79, 0.14)",
+  },
+  resultLabel: {
+    margin: `0 0 ${spacing.xs} 0`,
+    color: colors.accent,
+    fontSize: "clamp(0.9rem, 1.2vw, 1rem)",
+    fontWeight: fonts.weightBold,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+  },
+  resultText: {
+    margin: 0,
     color: colors.textPrimary,
     fontSize: "clamp(1rem, 1.35vw, 1.12rem)",
     fontWeight: fonts.weightMedium,
     lineHeight: 1.3,
-    maxWidth: "1120px",
   },
 };

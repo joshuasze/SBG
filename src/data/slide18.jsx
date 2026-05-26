@@ -17,15 +17,18 @@ export const PresenterSlide = ({ photo }) => (
       SBG can strengthen both impact and revenue through curated paid wellness offerings.
     </p>
     <article style={styles.card}>
-      <ul style={styles.list}>
+      <div style={styles.boxGrid}>
         {actions.map((item) => (
-          <li key={item} style={styles.item}>{item}</li>
+          <div key={item} style={styles.itemBox}>{item}</div>
         ))}
-      </ul>
+      </div>
     </article>
-    <p style={styles.result}>
-      Result: More conservation funding and stronger Smart Living + Smart People outcomes.
-    </p>
+    <article style={styles.resultCard}>
+      <p style={styles.resultLabel}>Result</p>
+      <p style={styles.resultText}>
+        More conservation funding and stronger Smart Living + Smart People outcomes.
+      </p>
+    </article>
   </SlideShell>
 );
 
@@ -38,15 +41,18 @@ export const AudienceSlide = ({ photo }) => (
       SBG can strengthen both impact and revenue through curated paid wellness offerings.
     </p>
     <article style={styles.card}>
-      <ul style={styles.list}>
+      <div style={styles.boxGrid}>
         {actions.map((item) => (
-          <li key={item} style={styles.item}>{item}</li>
+          <div key={item} style={styles.itemBox}>{item}</div>
         ))}
-      </ul>
+      </div>
     </article>
-    <p style={styles.result}>
-      Result: More conservation funding and stronger Smart Living + Smart People outcomes.
-    </p>
+    <article style={styles.resultCard}>
+      <p style={styles.resultLabel}>Result</p>
+      <p style={styles.resultText}>
+        More conservation funding and stronger Smart Living + Smart People outcomes.
+      </p>
+    </article>
   </SlideShell>
 );
 
@@ -77,23 +83,44 @@ const styles = {
     width: "100%",
     padding: "clamp(0.8rem, 1.6vw, 1.15rem)",
   },
-  list: {
+  boxGrid: {
     margin: 0,
-    paddingLeft: "1.2rem",
     display: "grid",
-    gap: "0.28rem",
+    gap: "clamp(0.45rem, 1vw, 0.7rem)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(240px, 100%), 1fr))",
   },
-  item: {
+  itemBox: {
+    background: colors.bgSubtle,
+    border: `1px solid ${colors.borderSubtle}`,
+    borderRadius: "6px",
+    padding: "clamp(0.55rem, 1.2vw, 0.85rem)",
     color: colors.textSecondary,
     fontSize: "clamp(1rem, 1.35vw, 1.12rem)",
     lineHeight: 1.28,
   },
-  result: {
+  resultCard: {
+    ...slideUi.card,
+    boxSizing: "border-box",
     margin: `${spacing.sm} 0 0 0`,
+    maxWidth: "980px",
+    width: "100%",
+    padding: "clamp(0.7rem, 1.4vw, 1rem)",
+    border: `1px solid ${colors.accent}`,
+    background: "rgba(215, 168, 79, 0.14)",
+  },
+  resultLabel: {
+    margin: `0 0 ${spacing.xs} 0`,
+    color: colors.accent,
+    fontSize: "clamp(0.9rem, 1.2vw, 1rem)",
+    fontWeight: fonts.weightBold,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+  },
+  resultText: {
+    margin: 0,
     color: colors.textPrimary,
     fontSize: "clamp(1rem, 1.35vw, 1.12rem)",
     fontWeight: fonts.weightMedium,
     lineHeight: 1.3,
-    maxWidth: "980px",
   },
 };
