@@ -1,6 +1,6 @@
 import { colors, fonts } from "../styles/tokens.js";
 
-export default function SlideShell({ photo, align = "center", children }) {
+export default function SlideShell({ photo, align = "center", overlayStyle, children }) {
   return (
     <div style={styles.page}>
       {photo ? (
@@ -15,7 +15,7 @@ export default function SlideShell({ photo, align = "center", children }) {
       ) : (
         <div style={styles.fallback} />
       )}
-      <div style={styles.overlay} />
+      <div style={{ ...styles.overlay, ...overlayStyle }} />
       <div
         style={{
           ...styles.content,
