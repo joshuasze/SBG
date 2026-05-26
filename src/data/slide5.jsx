@@ -22,7 +22,7 @@ const experienceSites = [
     title: "Healing Garden",
     points: [
       "2.5-hectare garden with over 400 medicinal plant species",
-      "Shows the connection between plants and traditional medicine",
+      "Shows the connection between humans and plants",
       "Links plant knowledge with human wellbeing",
     ],
   },
