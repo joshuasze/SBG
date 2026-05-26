@@ -1,4 +1,5 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
+import heritageLandscapePath from "../assets/photos/Slide 4 pic/IMG_7554.jpg";
 
 const pillars = [
   "Conservation & Biodiversity",
@@ -65,7 +66,9 @@ function SlideContent() {
 const styles = {
   page: {
     background:
-      "linear-gradient(135deg, #07110d 0%, #0b1712 42%, #16281e 100%)",
+      `linear-gradient(90deg, rgba(4, 10, 7, 0.86) 0%, rgba(4, 10, 7, 0.7) 54%, rgba(4, 10, 7, 0.42) 100%), linear-gradient(180deg, rgba(4, 10, 7, 0.4) 0%, rgba(4, 10, 7, 0.68) 100%), url(${heritageLandscapePath})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
     color: colors.textPrimary,
     fontFamily: fonts.family,
     minHeight: "100%",
@@ -115,9 +118,11 @@ const styles = {
     margin: `0 0 ${spacing.sm} 0`,
     maxWidth: "1180px",
     overflowWrap: "break-word",
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
   },
   factBox: {
-    background: "rgba(245, 240, 230, 0.06)",
+    background: "rgba(4, 10, 7, 0.64)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderLeft: `4px solid ${colors.accent}`,
     borderRadius: "8px",
@@ -154,7 +159,8 @@ const styles = {
   },
   pillar: {
     alignItems: "center",
-    background: "rgba(245, 240, 230, 0.06)",
+    background: "rgba(4, 10, 7, 0.6)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderRadius: "8px",
     boxSizing: "border-box",
@@ -183,7 +189,8 @@ const styles = {
     width: "2.2rem",
   },
   focus: {
-    background: "rgba(79, 122, 89, 0.22)",
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderLeft: `4px solid ${colors.accent}`,
     borderRadius: "8px",

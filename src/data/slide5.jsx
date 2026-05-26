@@ -1,5 +1,6 @@
 import { colors, fonts } from "../styles/tokens.js";
 import { slideText, slideUi } from "./slideTheme.js";
+import educationFeaturePath from "../assets/photos/Slide 6 pic/IMG_7510.jpg";
 import healingPath from "../assets/photos/on audience f2/IMG_7526.jpg";
 import wellnessPath from "../assets/photos/on audience f2/IMG_7532.jpg";
 import gardenPath from "../assets/photos/on audience f2/IMG_7523.jpg";
@@ -22,7 +23,7 @@ const experienceSites = [
     title: "Healing Garden",
     points: [
       "2.5-hectare garden with over 400 medicinal plant species",
-      "Shows the connection between plants and traditional medicine",
+      "Shows the connection between humans and plants",
       "Links plant knowledge with human wellbeing",
     ],
   },
@@ -129,7 +130,9 @@ function AudiencePhotoCollage() {
 const styles = {
   page: {
     background:
-      "linear-gradient(135deg, #07110d 0%, #11231b 48%, #20261b 100%)",
+      `linear-gradient(90deg, rgba(4, 10, 7, 0.86) 0%, rgba(4, 10, 7, 0.7) 54%, rgba(4, 10, 7, 0.42) 100%), linear-gradient(180deg, rgba(4, 10, 7, 0.4) 0%, rgba(4, 10, 7, 0.68) 100%), url(${educationFeaturePath})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
     color: colors.textPrimary,
     fontFamily: fonts.family,
     minHeight: "100%",
@@ -139,7 +142,7 @@ const styles = {
   },
   canopy: {
     background:
-      "radial-gradient(circle at 78% 18%, rgba(215, 168, 79, 0.16), transparent 24%), radial-gradient(circle at 14% 86%, rgba(79, 122, 89, 0.34), transparent 30%)",
+      "radial-gradient(circle at 78% 18%, rgba(215, 168, 79, 0.12), transparent 24%), radial-gradient(circle at 14% 86%, rgba(79, 122, 89, 0.2), transparent 30%)",
     inset: 0,
     position: "absolute",
   },
@@ -194,6 +197,7 @@ const styles = {
     margin: 0,
     maxWidth: "1320px",
     overflowWrap: "break-word",
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
   },
   lede: {
     color: colors.textSecondary,
@@ -201,6 +205,7 @@ const styles = {
     lineHeight: 1.38,
     margin: 0,
     maxWidth: "880px",
+    textShadow: "0 2px 12px rgba(0, 0, 0, 0.78)",
   },
   cardGrid: {
     display: "grid",
@@ -209,6 +214,8 @@ const styles = {
   },
   card: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     minHeight: "clamp(210px, 25vh, 270px)",
     padding: "clamp(0.9rem, 1.8vw, 1.45rem)",
@@ -239,7 +246,8 @@ const styles = {
     gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 24rem), 1fr))",
   },
   sideNote: {
-    background: "rgba(245, 240, 230, 0.07)",
+    background: "rgba(4, 10, 7, 0.6)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderRadius: "8px",
     boxSizing: "border-box",
@@ -250,7 +258,8 @@ const styles = {
     padding: "0.75rem 0.85rem",
   },
   takeaway: {
-    background: "rgba(79, 122, 89, 0.25)",
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(3px)",
     border: `1px solid ${colors.border}`,
     borderLeft: `4px solid ${colors.accent}`,
     borderRadius: "8px",
