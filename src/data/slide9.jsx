@@ -5,6 +5,7 @@ import { slideText, slideUi } from "./slideTheme.js";
 const innovationPoints = [
   "Rubber tree innovation",
   "Orchid breeding",
+  "Orchid Cool House",
 ];
 
 const researchPoints = [
