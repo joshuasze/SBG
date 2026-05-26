@@ -17,6 +17,13 @@ export const POLL_DEFINITIONS_BY_PAGE = {
       "Jonathan",
     ],
   },
+  21: {
+    question: "Like?",
+    options: [
+      "Yes",
+      "Still Yes, but a different option",
+    ],
+  },
 };
 
 export default POLL_DEFINITIONS_BY_PAGE;
