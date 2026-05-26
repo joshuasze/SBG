@@ -30,7 +30,7 @@ export default function PollCard({ socket, poll }) {
       {poll.image && (
         <img
           src={poll.image}
-          alt="Orchid for the poll question"
+          alt={poll.imageAlt ?? "Image for the poll question"}
           style={styles.pollImage}
           loading="eager"
           decoding="async"
