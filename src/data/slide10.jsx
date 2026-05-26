@@ -1,6 +1,7 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
+import smartLivingPath from "../assets/photos/on audience f2/IMG_4255.jpg";
 import xjpFlower from "../assets/photos/XJPflower.png";
 
 const smartLivingPoints = [
@@ -17,19 +18,19 @@ const smartEconomyPoints = [
 
 export const PresenterSlide = ({ photo }) => (
   <SlideShell
-    photo={photo}
+    photo={photo ?? smartLivingPath}
     align="left"
   >
-    <p style={slideText.eyebrow}>Secondary Contributions</p>
-    <h1 style={slideText.heading}>Smart Living and Smart Economy</h1>
+    <p style={styles.eyebrow}>Secondary Contributions</p>
+    <h1 style={styles.heading}>Smart Living and Smart Economy</h1>
     <SecondaryContributionGrid />
   </SlideShell>
 );
 
 export const AudienceSlide = ({ photo }) => (
-  <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Secondary Contributions</p>
-    <h1 style={slideText.heading}>Smart Living and Smart Economy</h1>
+  <SlideShell photo={photo ?? smartLivingPath} align="left">
+    <p style={styles.eyebrow}>Secondary Contributions</p>
+    <h1 style={styles.heading}>Smart Living and Smart Economy</h1>
     <SecondaryContributionGrid />
   </SlideShell>
 );
@@ -72,6 +73,14 @@ function SecondaryContributionGrid() {
 }
 
 const styles = {
+  eyebrow: {
+    ...slideText.eyebrow,
+    textShadow: "0 2px 12px rgba(0, 0, 0, 0.78)",
+  },
+  heading: {
+    ...slideText.heading,
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
+  },
   layout: {
     display: "grid",
     gridTemplateColumns: "minmax(0, 1fr) minmax(220px, 360px)",
@@ -87,6 +96,8 @@ const styles = {
   },
   card: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     padding: "clamp(0.9rem, 2vw, 1.4rem)",
     minHeight: "clamp(220px, 36vh, 320px)",
@@ -111,6 +122,8 @@ const styles = {
   },
   imagePanel: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     display: "grid",
     gap: "0.6rem",

@@ -1,6 +1,7 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
+import governancePeoplePath from "../assets/photos/slide12/IMG_4399.jpg";
 
 const governancePoints = [
   "Well-planned garden zoning and land use",
@@ -12,19 +13,19 @@ const peoplePoints = [
 
 export const PresenterSlide = ({ photo }) => (
   <SlideShell
-    photo={photo}
+    photo={photo ?? governancePeoplePath}
     align="left"
   >
-    <p style={slideText.eyebrow}>Minor Contribution</p>
-    <h1 style={slideText.heading}>Smart Governance and Smart People</h1>
+    <p style={styles.eyebrow}>Minor Contribution</p>
+    <h1 style={styles.heading}>Smart Governance and Smart People</h1>
     <MinorContributionGrid />
   </SlideShell>
 );
 
 export const AudienceSlide = ({ photo }) => (
-  <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Minor Contribution</p>
-    <h1 style={slideText.heading}>Smart Governance and Smart People</h1>
+  <SlideShell photo={photo ?? governancePeoplePath} align="left">
+    <p style={styles.eyebrow}>Minor Contribution</p>
+    <h1 style={styles.heading}>Smart Governance and Smart People</h1>
     <MinorContributionGrid />
   </SlideShell>
 );
@@ -54,6 +55,14 @@ function MinorContributionGrid() {
 }
 
 const styles = {
+  eyebrow: {
+    ...slideText.eyebrow,
+    textShadow: "0 2px 12px rgba(0, 0, 0, 0.78)",
+  },
+  heading: {
+    ...slideText.heading,
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
+  },
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
@@ -63,6 +72,8 @@ const styles = {
   },
   card: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     padding: "clamp(0.9rem, 2vw, 1.4rem)",
     minHeight: "clamp(180px, 30vh, 250px)",

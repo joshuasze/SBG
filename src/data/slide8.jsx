@@ -1,6 +1,14 @@
 import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
+import smartEnvironmentPath from "../assets/photos/slide9/IMG_4407.jpg";
+import biodiversityPath from "../assets/photos/slide9/IMG_4373.jpg";
+import projectPath from "../assets/photos/slide9/SGP project.png";
+import canopyPath from "../assets/photos/slide9/slide11_c.jpg";
+import preservationPath from "../assets/photos/slide9/slide11_b.jpg";
+import gardenPath from "../assets/photos/slide9/IMG_4468.jpg";
+import rainforestPath from "../assets/photos/slide9/slide5_g .jpg";
+import naturePath from "../assets/photos/slide9/IMG_4308.jpg";
 
 const embodimentPoints = [
   "82 hectares of greenery",
@@ -14,22 +22,31 @@ const biodiversityPoints = [
   "Examples: the Dell and the primary rainforest",
 ];
 
+const audiencePhotos = [
+  { src: projectPath, alt: "Singapore project smart environment visual", variant: "wide" },
+  { src: biodiversityPath, alt: "Biodiversity in Singapore Botanic Gardens", variant: "tall" },
+  { src: smartEnvironmentPath, alt: "Smart environment garden contribution", variant: "large" },
+  { src: canopyPath, alt: "Green canopy and preserved plant life", variant: "tall" },
+  { src: preservationPath, alt: "Preservation area in the Gardens", variant: "tall" },
+  { src: gardenPath, alt: "City in nature garden landscape", variant: "large" },
+  { src: rainforestPath, alt: "Primary rainforest greenery", variant: "wide" },
+  { src: naturePath, alt: "Nature trail in Singapore Botanic Gardens", variant: "tall" },
+];
+
 export const PresenterSlide = ({ photo }) => (
   <SlideShell
-    photo={photo}
+    photo={photo ?? smartEnvironmentPath}
     align="left"
   >
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
+    <p style={styles.eyebrow}>Singapore as a Smart City</p>
+    <h1 style={styles.heading}>Smart Environment: The Major Contribution</h1>
     <SmartEnvironmentContent />
   </SlideShell>
 );
 
 export const AudienceSlide = ({ photo }) => (
-  <SlideShell photo={photo} align="left">
-    <p style={slideText.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={slideText.heading}>Smart Environment: The Major Contribution</h1>
-    <SmartEnvironmentContent />
+  <SlideShell photo={photo ?? smartEnvironmentPath} align="left">
+    <AudiencePhotoCollage />
   </SlideShell>
 );
 
@@ -57,7 +74,54 @@ function SmartEnvironmentContent() {
   );
 }
 
+function AudiencePhotoCollage() {
+  return (
+    <section style={styles.audienceLayout} aria-label="Smart environment photo collage">
+      <div>
+        <p style={styles.eyebrow}>Singapore as a Smart City</p>
+        <h1 style={styles.audienceTitle}>
+          Smart Environment: The Major Contribution
+        </h1>
+      </div>
+      <div className="audience-photo-collage">
+        {audiencePhotos.map((photo) => (
+          <figure
+            className={`audience-photo-collage__item ${
+              photo.variant ? `is-${photo.variant}` : ""
+            }`}
+            key={photo.src}
+          >
+            <img src={photo.src} alt={photo.alt} loading="eager" />
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const styles = {
+  eyebrow: {
+    ...slideText.eyebrow,
+    textShadow: "0 2px 12px rgba(0, 0, 0, 0.78)",
+  },
+  heading: {
+    ...slideText.heading,
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
+  },
+  audienceLayout: {
+    display: "grid",
+    gap: "clamp(0.85rem, 1.5vw, 1.25rem)",
+    width: "100%",
+  },
+  audienceTitle: {
+    ...slideText.heading,
+    fontSize: "clamp(1.9rem, 4.2vw, 3.9rem)",
+    lineHeight: 0.96,
+    margin: 0,
+    maxWidth: "1120px",
+    overflowWrap: "break-word",
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
+  },
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
@@ -67,6 +131,8 @@ const styles = {
   },
   card: {
     ...slideUi.card,
+    background: "rgba(4, 10, 7, 0.66)",
+    backdropFilter: "blur(4px)",
     boxSizing: "border-box",
     padding: "clamp(0.9rem, 2vw, 1.4rem)",
   },
