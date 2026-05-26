@@ -2,6 +2,11 @@ import { colors, fonts, spacing } from "../styles/tokens.js";
 import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
 import innovationDeliveryPath from "../assets/photos/slide10/IMG_20260523_124002.jpg";
+import nurseryPath from "../assets/photos/slide10/IMG_4338.jpg";
+import orchidPath from "../assets/photos/slide10/IMG_7553.jpg";
+import researchPath from "../assets/photos/slide10/IMG_4249.jpg";
+import innovationPath from "../assets/photos/slide10/slide 11_a.jpg";
+import digitalPath from "../assets/photos/slide10/IMG_4284.jpg";
 
 const innovationPoints = [
   "Rubber tree innovation",
@@ -18,6 +23,15 @@ const digitalPoints = [
   "Digital twin",
 ];
 
+const audiencePhotos = [
+  { src: innovationDeliveryPath, alt: "Smart environment innovation display", variant: "large" },
+  { src: nurseryPath, alt: "Plant nursery and innovation area", variant: "tall" },
+  { src: innovationPath, alt: "Innovation and delivery garden feature", variant: "wide" },
+  { src: orchidPath, alt: "Orchid breeding and plant innovation", variant: "tall" },
+  { src: researchPath, alt: "Research center and garden science display", variant: "large" },
+  { src: digitalPath, alt: "Digitalization effort in the Gardens", variant: "tall" },
+];
+
 export const PresenterSlide = ({ photo }) => (
   <SlideShell
     photo={photo ?? innovationDeliveryPath}
@@ -31,9 +45,7 @@ export const PresenterSlide = ({ photo }) => (
 
 export const AudienceSlide = ({ photo }) => (
   <SlideShell photo={photo ?? innovationDeliveryPath} align="left">
-    <p style={styles.eyebrow}>Singapore as a Smart City</p>
-    <h1 style={styles.heading}>Smart Environment: Innovation and Delivery</h1>
-    <SmartEnvironmentContinuation />
+    <AudiencePhotoCollage />
   </SlideShell>
 );
 
@@ -70,6 +82,31 @@ function SmartEnvironmentContinuation() {
   );
 }
 
+function AudiencePhotoCollage() {
+  return (
+    <section style={styles.audienceLayout} aria-label="Smart environment innovation photo collage">
+      <div>
+        <p style={styles.eyebrow}>Singapore as a Smart City</p>
+        <h1 style={styles.audienceTitle}>
+          Smart Environment: Innovation and Delivery
+        </h1>
+      </div>
+      <div className="audience-photo-collage">
+        {audiencePhotos.map((photo) => (
+          <figure
+            className={`audience-photo-collage__item ${
+              photo.variant ? `is-${photo.variant}` : ""
+            }`}
+            key={photo.src}
+          >
+            <img src={photo.src} alt={photo.alt} loading="eager" />
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const styles = {
   eyebrow: {
     ...slideText.eyebrow,
@@ -77,6 +114,20 @@ const styles = {
   },
   heading: {
     ...slideText.heading,
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
+  },
+  audienceLayout: {
+    display: "grid",
+    gap: "clamp(0.85rem, 1.5vw, 1.25rem)",
+    width: "100%",
+  },
+  audienceTitle: {
+    ...slideText.heading,
+    fontSize: "clamp(1.9rem, 4.2vw, 3.9rem)",
+    lineHeight: 0.96,
+    margin: 0,
+    maxWidth: "1120px",
+    overflowWrap: "break-word",
     textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
   },
   grid: {

@@ -3,6 +3,14 @@ import SlideShell from "./SlideShell.jsx";
 import { slideText, slideUi } from "./slideTheme.js";
 import smartLivingPath from "../assets/photos/on audience f2/IMG_4255.jpg";
 import xjpFlower from "../assets/photos/XJPflower.png";
+import livingPath from "../assets/photos/slide11/IMG_9245.jpg";
+import economyPath from "../assets/photos/slide11/IMG_4416.jpg";
+import communityPath from "../assets/photos/slide11/IMG_9246.jpg";
+import accessPath from "../assets/photos/slide11/IMG_9243.jpg";
+import diplomacyPath from "../assets/photos/slide11/IMG_9242.jpg";
+import gardenPath from "../assets/photos/slide11/slide6_o.jpg";
+import peoplePath from "../assets/photos/slide11/IMG_4255.jpg";
+import orchidPath from "../assets/photos/slide11/IMG_4268.jpg";
 
 const smartLivingPoints = [
   "Supply of publicly accessible green space",
@@ -14,6 +22,17 @@ const smartEconomyPoints = [
   "Attracts tourists and talent",
   "Differential pricing for tourists",
   "Orchid diplomacy, including named orchids for Obama, Xi Jinping, and Pope Francis",
+];
+
+const audiencePhotos = [
+  { src: livingPath, alt: "Smart living green space in Singapore Botanic Gardens", variant: "large" },
+  { src: economyPath, alt: "Visitor attraction and garden economy feature", variant: "tall" },
+  { src: communityPath, alt: "Community experience inside the Gardens", variant: "large" },
+  { src: accessPath, alt: "Accessible garden space for visitors", variant: "tall" },
+  { src: diplomacyPath, alt: "Orchid diplomacy and cultural display", variant: "tall" },
+  { src: gardenPath, alt: "Singapore Botanic Gardens landscape", variant: "wide" },
+  { src: peoplePath, alt: "Publicly accessible green space", variant: "tall" },
+  { src: orchidPath, alt: "Orchid and smart economy contribution", variant: "tall" },
 ];
 
 export const PresenterSlide = ({ photo }) => (
@@ -29,9 +48,7 @@ export const PresenterSlide = ({ photo }) => (
 
 export const AudienceSlide = ({ photo }) => (
   <SlideShell photo={photo ?? smartLivingPath} align="left">
-    <p style={styles.eyebrow}>Secondary Contributions</p>
-    <h1 style={styles.heading}>Smart Living and Smart Economy</h1>
-    <SecondaryContributionGrid />
+    <AudiencePhotoCollage />
   </SlideShell>
 );
 
@@ -72,6 +89,29 @@ function SecondaryContributionGrid() {
   );
 }
 
+function AudiencePhotoCollage() {
+  return (
+    <section style={styles.audienceLayout} aria-label="Smart living and economy photo collage">
+      <div>
+        <p style={styles.eyebrow}>Secondary Contributions</p>
+        <h1 style={styles.audienceTitle}>Smart Living and Smart Economy</h1>
+      </div>
+      <div className="audience-photo-collage">
+        {audiencePhotos.map((photo) => (
+          <figure
+            className={`audience-photo-collage__item ${
+              photo.variant ? `is-${photo.variant}` : ""
+            }`}
+            key={photo.src}
+          >
+            <img src={photo.src} alt={photo.alt} loading="eager" />
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const styles = {
   eyebrow: {
     ...slideText.eyebrow,
@@ -79,6 +119,20 @@ const styles = {
   },
   heading: {
     ...slideText.heading,
+    textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
+  },
+  audienceLayout: {
+    display: "grid",
+    gap: "clamp(0.85rem, 1.5vw, 1.25rem)",
+    width: "100%",
+  },
+  audienceTitle: {
+    ...slideText.heading,
+    fontSize: "clamp(1.9rem, 4.2vw, 3.9rem)",
+    lineHeight: 0.96,
+    margin: 0,
+    maxWidth: "1120px",
+    overflowWrap: "break-word",
     textShadow: "0 3px 18px rgba(0, 0, 0, 0.72)",
   },
   layout: {
